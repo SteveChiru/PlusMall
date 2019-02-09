@@ -30,3 +30,6 @@ hs_err_pid*
 
 # target
 */target
+
+# database configuration
+plusmall-commons/src/main/resources/mybatis-generator/generatorConfig.xml
