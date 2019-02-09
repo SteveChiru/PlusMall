@@ -16,7 +16,7 @@
         <module>plusmall-user-web</module>
         <module>plusmall-dao</module>
         <module>plusmall-pojo</module>
-        <module>plusmall-common</module>
+        <module>plusmall-commons</module>
     </modules>
 
     <packaging>pom</packaging>
