@@ -49,6 +49,15 @@
             <groupId>javassist</groupId>
             <artifactId>javassist</artifactId>
         </dependency>
+        <!-- jackson -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
 
         <!--operator-service-->
         <dependency>

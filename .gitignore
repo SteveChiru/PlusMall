@@ -33,3 +33,4 @@ hs_err_pid*
 
 # database configuration
 plusmall-commons/src/main/resources/mybatis-generator/generatorConfig.xml
+plusmall-dao/src/main/resources/db.properties

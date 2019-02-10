@@ -1,8 +1,9 @@
 package com.plusmall.operator.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.plusmall.commons.PageResult;
 import com.plusmall.operator.Brand;
-import com.plusmall.operator.DubboTest;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -11,22 +12,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @Description:
  */
 @Controller
-@RequestMapping("/test")
-public class DubboTestController {
-	@Reference
-	private DubboTest dubboTest;
+@RequestMapping("/brand")
+public class BrandController {
+	private static Logger logger = Logger.getLogger(BrandController.class);
+
 	@Reference
 	private Brand brand;
 
-	@RequestMapping("/showName")
+	@RequestMapping("/getAll")
 	@ResponseBody
-	public String showName(){
-		return dubboTest.getName();
-	}
-
-	@RequestMapping("/brand")
-	@ResponseBody
-	public String testBrand(){
-		return brand.testBrand();
+	public PageResult getAllBrands(){
+		logger.info("进入controller-getAllBrands方法");
+		PageResult result = brand.getBrands();
+		return result;
 	}
 }

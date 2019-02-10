@@ -45,6 +45,11 @@
             <groupId>javassist</groupId>
             <artifactId>javassist</artifactId>
         </dependency>
+        <!-- log4j -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+        </dependency>
 
         <!--依赖运营商接口-->
         <dependency>

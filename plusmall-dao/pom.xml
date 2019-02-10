@@ -13,15 +13,40 @@
     <artifactId>plusmall-dao</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <properties>
-        <plusmall-pojo.version>1.0-SNAPSHOT</plusmall-pojo.version>
-    </properties>
-
     <dependencies>
+        <!--spring-tx-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+        </dependency>
+        <!-- pagehelper -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+        </dependency>
+        <!-- mysql -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <!-- druid -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+        </dependency>
+        <!-- mybatis -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+        </dependency>
+        <!-- pojo -->
         <dependency>
             <groupId>org.plusmall</groupId>
             <artifactId>plusmall-pojo</artifactId>
-            <version>${plusmall-pojo.version}</version>
         </dependency>
     </dependencies>
 
