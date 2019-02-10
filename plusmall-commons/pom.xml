@@ -24,13 +24,18 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
+        <!--log4j-->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
                 <groupId>org.mybatis.generator</groupId>
-                <artifactId>mybatis-generator-core</artifactId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
                 <version>1.3.2</version>
                 <configuration>
                     <!-- mybatis用于生成代码的配置文件 -->

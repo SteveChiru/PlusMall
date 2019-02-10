@@ -13,5 +13,16 @@
     <artifactId>plusmall-dao</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <properties>
+        <plusmall-pojo.version>1.0-SNAPSHOT</plusmall-pojo.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.plusmall</groupId>
+            <artifactId>plusmall-pojo</artifactId>
+            <version>${plusmall-pojo.version}</version>
+        </dependency>
+    </dependencies>
 
 </project>
