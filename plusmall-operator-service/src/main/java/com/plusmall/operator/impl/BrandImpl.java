@@ -25,16 +25,10 @@ public class BrandImpl implements Brand {
 	private TbBrandMapper brandMapper;
 
 	@Override
-	public PageResult getBrands() {
-		logger.info("进入服务层-BrandImpl-getBrands方法");
-		PageHelper.startPage(1,10);
-		TbBrandExample example = new TbBrandExample();
-		Page<TbBrand> page = (Page<TbBrand>) brandMapper.selectByExample(example);
+	public PageResult getBrandsPerPae(int pageNum, int pageSize) {
+		logger.info("进入服务层-BrandImpl-getBrandsPerPage方法");
+		PageHelper.startPage(pageNum,pageSize);
+		Page<TbBrand> page = (Page<TbBrand>) brandMapper.selectByExample(null);
 		return new PageResult(page.getTotal(),page.getPages(),page.getPageSize(),page.getResult());
-	}
-
-	@Override
-	public String testBrand() {
-		return "ok";
 	}
 }

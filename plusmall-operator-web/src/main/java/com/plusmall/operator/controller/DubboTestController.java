@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class DubboTestController {
 	@Reference
 	private DubboTest dubboTest;
-	@Reference
-	private Brand brand;
 
 	@RequestMapping("/showName")
 	@ResponseBody
@@ -24,9 +22,4 @@ public class DubboTestController {
 		return dubboTest.getName();
 	}
 
-	@RequestMapping("/brand")
-	@ResponseBody
-	public String testBrand(){
-		return brand.testBrand();
-	}
 }

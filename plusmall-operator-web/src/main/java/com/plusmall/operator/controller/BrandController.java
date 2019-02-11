@@ -7,11 +7,12 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @Description:
  */
-@Controller
+@RestController
 @RequestMapping("/brand")
 public class BrandController {
 	private static Logger logger = Logger.getLogger(BrandController.class);
@@ -19,11 +20,10 @@ public class BrandController {
 	@Reference
 	private Brand brand;
 
-	@RequestMapping("/getAll")
-	@ResponseBody
-	public PageResult getAllBrands(){
-		logger.info("进入controller-getAllBrands方法");
-		PageResult result = brand.getBrands();
+	@RequestMapping("/getPage")
+	public PageResult getBrandsPerPage(int pageNum,int pageSize){
+		logger.info("进入BrandController-getBrandsPerPage方法");
+		PageResult result = brand.getBrandsPerPae(pageNum, pageSize);
 		return result;
 	}
 }

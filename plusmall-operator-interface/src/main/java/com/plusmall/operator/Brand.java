@@ -6,6 +6,5 @@ import com.plusmall.commons.PageResult;
  * @Description:
  */
 public interface Brand {
-	public PageResult getBrands();
-	public String testBrand();
+	public PageResult getBrandsPerPae(int pageNum, int pageSize);
 }
