@@ -31,4 +31,10 @@ public class BrandImpl implements Brand {
 		Page<TbBrand> page = (Page<TbBrand>) brandMapper.selectByExample(null);
 		return new PageResult(page.getTotal(),page.getPages(),page.getPageSize(),page.getResult());
 	}
+
+	@Override
+	public void add(TbBrand brand) {
+		logger.info("进入服务层-BrandImpl-add方法");
+		brandMapper.insert(brand);
+	}
 }

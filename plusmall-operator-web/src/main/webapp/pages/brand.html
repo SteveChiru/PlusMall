@@ -137,7 +137,20 @@
                 onChange: function(){
                     $scope.reloadList();//重新加载
                 }
-
+            }
+            
+            //添加brand到数据库
+            $scope.save=function () {
+                $http.post('../brand/addBrand.do',$scope.entity).success(
+                    function (callback) {
+                        //添加成功
+                        if (callback.success) {
+                            $scope.reloadList();
+                        }else {
+                            alert(callback.msg);
+                        }
+                    }
+                );
             }
         });
     </script>
