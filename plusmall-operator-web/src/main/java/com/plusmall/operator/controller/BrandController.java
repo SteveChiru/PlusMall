@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/brand")
 public class BrandController {
 	private static Logger logger = Logger.getLogger(BrandController.class);
+	private static ActionResult actionResult;
 
 	@Reference
 	private Brand brand;
@@ -29,16 +30,38 @@ public class BrandController {
 	}
 
 	@RequestMapping("/addBrand")
-	public ActionResult addBrand(@RequestBody TbBrand branddata){
+	public ActionResult addBrand(@RequestBody TbBrand brandinfo){
 		logger.info("进入BrandController-addBrand方法");
 		try {
-			logger.info("firstChar:"+branddata.getFirstChar());
-			brand.add(branddata);
-			return new ActionResult(true,"添加成功");
+			logger.info("firstChar:"+brandinfo.getFirstChar());
+			brand.add(brandinfo);
+			actionResult = new ActionResult(true,"添加成功");
 		}catch (Exception e){
 			e.printStackTrace();
-			return new ActionResult(false,"添加失败");
+			actionResult = new ActionResult(false,"添加失败");
+		}finally {
+			return actionResult;
 		}
+	}
 
+	@RequestMapping("/findOne")
+	public TbBrand findOne(Long id){
+		logger.info("进入BrandController-findOne方法");
+		TbBrand brandById = brand.getBrandById(id);
+		return brandById;
+	}
+
+	@RequestMapping("/updateBrand")
+	public ActionResult updateBrand(@RequestBody TbBrand brandinfo){
+		logger.info("进入BrandController-updateBrand方法");
+		try {
+			brand.update(brandinfo);
+			actionResult = new ActionResult(true,"更新成功");
+		}catch (Exception e){
+			e.printStackTrace();
+			actionResult = new ActionResult(false,"更新失败");
+		}finally {
+			return actionResult;
+		}
 	}
 }
