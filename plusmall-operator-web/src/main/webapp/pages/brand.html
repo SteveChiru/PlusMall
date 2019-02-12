@@ -7,19 +7,25 @@
     <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
 
     <title>品牌管理</title>
+    <!--引入CSS框架及插件-->
     <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../plugins/adminLTE/css/AdminLTE.css">
     <link rel="stylesheet" href="../plugins/adminLTE/css/skins/_all-skins.min.css">
     <link rel="stylesheet" href="../plugins/angularjs/pagination.css">
-
+    <!--引入JS框架及插件-->
 	<script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
     <script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="../plugins/angularjs/angular.min.js"></script>
 	<script src="../plugins/angularjs/pagination.js"></script>
+    <!--JS开发代码-->
+    <script type="text/javascript" src="../js/base_pagination.js"></script>
+    <script type="text/javascript" src="../js/service/brandService.js"></script>
+    <script type="text/javascript" src="../js/controller/baseController.js"></script>
+    <script type="text/javascript" src="../js/controller/brandController.js"></script>
 
 </head>
 <body class="hold-transition skin-red sidebar-mini"
-    ng-app="plusmall" ng-controller="brandController" ng-init="reloadList()">
+    ng-app="plusmall" ng-controller="brandController">
 
     <div class=" box-header with-border">
         <h3 class="box-title">品牌管理</h3>
@@ -108,93 +114,7 @@
     </div>
 
     <!-- js 代码-->
-    <script type="text/javascript">
 
-        var app = angular.module("plusmall",['pagination']);
-
-        app.controller("brandController",function ($scope, $http) {
-
-            $scope.idsSelected=[];
-            
-            $scope.updateSelection=function($event,id){
-                if ($event.target.checked) {
-                    $scope.idsSelected.push(id);
-                }else{
-                    var idx = $scope.idsSelected.indexOf(id);
-                    $scope.idsSelected.splice(idx,1)
-                }
-            }
-
-            $scope.delete=function(){
-                if (confirm("确定要删除所选品牌信息？")){
-                    $http.get('../brand/delete.do?ids='+$scope.idsSelected).success(
-                        function (callback) {
-                            if (callback.success) {
-                                $scope.reloadList();
-                            }else {
-                                alert(callback.msg);
-                            }
-                        }
-                    );
-                }
-            }
-
-            $scope.searchBrand={};
-            $scope.search=function(pageNum,pageSize){
-                $http.post('../brand/search.do?pageNum='+pageNum+'&pageSize='+pageSize,$scope.searchBrand).success(
-                    function (callback) {
-                        $scope.result = callback.result;
-                        $scope.paginationConf.totalItems = callback.total;
-                    }
-                );
-            }
-
-            $scope.reloadList=function(){
-                //切换页码
-                $scope.search($scope.paginationConf.currentPage,
-                    $scope.paginationConf.itemsPerPage);
-            }
-
-            //分页控件配置
-            $scope.paginationConf = {
-                currentPage: 1,
-                totalItems: 5,
-                itemsPerPage: 5,
-                perPageOptions: [5,10, 20, 30, 40, 50],
-                onChange: function(){
-                    $scope.reloadList();//重新加载
-                }
-            }
-
-            //添加brand到数据库
-            $scope.save=function () {
-                var action="addBrand";
-                if ($scope.brand.id != null){
-                    action="updateBrand";
-                }
-
-                $http.post('../brand/'+action+'.do',$scope.brand).success(
-                    function (callback) {
-                        //添加成功
-                        if (callback.success) {
-                            $scope.reloadList();
-                        }else {
-                            alert(callback.msg);
-                        }
-                    }
-                );
-            }
-
-            //根据id查找单个brand数据
-            $scope.findOne=function (id) {
-                $http.get('../brand/findOne.do?id='+id).success(
-                    function (callback) {
-                        $scope.brand=callback   //返回的是单个的brand信息
-                    }
-                );
-            }
-        });
-    </script>
 
 </body>
 </html>
