@@ -6,7 +6,7 @@ import com.plusmall.model.TbBrand;
 /**
  * @Description:
  */
-public interface Brand {
+public interface BrandService {
 	public void add(TbBrand brand);
 	public TbBrand getBrandById(Long id);
 	public void update(TbBrand brand);

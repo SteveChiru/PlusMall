@@ -8,19 +8,17 @@ import com.plusmall.mapper.TbBrandMapper;
 import com.plusmall.model.TbBrand;
 import com.plusmall.model.TbBrandExample;
 import com.plusmall.model.TbBrandExample.Criteria;
-import com.plusmall.operator.Brand;
+import com.plusmall.operator.BrandService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.List;
 
 /**
  * @Description:
  */
 @Service
-public class BrandImpl implements Brand {
+public class BrandServiceImpl implements BrandService {
 
-	private static Logger logger = Logger.getLogger(BrandImpl.class);
+	private static Logger logger = Logger.getLogger(BrandServiceImpl.class);
 
 	@Autowired
 	private TbBrandMapper brandMapper;

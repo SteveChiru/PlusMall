@@ -4,7 +4,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.plusmall.commons.ActionResult;
 import com.plusmall.commons.PageResult;
 import com.plusmall.model.TbBrand;
-import com.plusmall.operator.Brand;
+import com.plusmall.operator.BrandService;
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,14 +20,14 @@ public class BrandController {
 	private static ActionResult actionResult;
 
 	@Reference
-	private Brand brand;
+	private BrandService brandService;
 
 	@RequestMapping("/addBrand")
 	public ActionResult addBrand(@RequestBody TbBrand brandinfo){
 		logger.info("进入BrandController-addBrand方法");
 		try {
 			logger.info("firstChar:"+brandinfo.getFirstChar());
-			brand.add(brandinfo);
+			brandService.add(brandinfo);
 			actionResult = new ActionResult(true,"添加成功");
 		}catch (Exception e){
 			e.printStackTrace();
@@ -40,7 +40,7 @@ public class BrandController {
 	@RequestMapping("/findOne")
 	public TbBrand findOne(Long id){
 		logger.info("进入BrandController-findOne方法");
-		TbBrand brandById = brand.getBrandById(id);
+		TbBrand brandById = brandService.getBrandById(id);
 		return brandById;
 	}
 
@@ -48,7 +48,7 @@ public class BrandController {
 	public ActionResult updateBrand(@RequestBody TbBrand brandinfo){
 		logger.info("进入BrandController-updateBrand方法");
 		try {
-			brand.update(brandinfo);
+			brandService.update(brandinfo);
 			actionResult = new ActionResult(true,"更新成功");
 		}catch (Exception e){
 			e.printStackTrace();
@@ -63,7 +63,7 @@ public class BrandController {
 		logger.info("进入BrandController-delete方法");
 		try {
 			System.out.println(ids);
-			brand.delete(ids);
+			brandService.delete(ids);
 			actionResult = new ActionResult(true,"删除品牌成功");
 		}catch (Exception e){
 			e.printStackTrace();
@@ -76,7 +76,7 @@ public class BrandController {
 	@RequestMapping("/search")
 	public PageResult searchBrands(@RequestBody TbBrand brandinfo,int pageNum,int pageSize){
 		logger.info("进入BrandController-searchBrands方法");
-		PageResult result = brand.searchBrands(brandinfo, pageNum, pageSize);
+		PageResult result = brandService.searchBrands(brandinfo, pageNum, pageSize);
 		return result;
 	}
 }
