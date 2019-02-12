@@ -22,13 +22,6 @@ public class BrandController {
 	@Reference
 	private Brand brand;
 
-	@RequestMapping("/getPage")
-	public PageResult getBrandsPerPage(int pageNum,int pageSize){
-		logger.info("进入BrandController-getBrandsPerPage方法");
-		PageResult result = brand.getBrandsPerPae(pageNum, pageSize);
-		return result;
-	}
-
 	@RequestMapping("/addBrand")
 	public ActionResult addBrand(@RequestBody TbBrand brandinfo){
 		logger.info("进入BrandController-addBrand方法");
@@ -78,5 +71,12 @@ public class BrandController {
 		}finally {
 			return actionResult;
 		}
+	}
+
+	@RequestMapping("/search")
+	public PageResult searchBrands(@RequestBody TbBrand brandinfo,int pageNum,int pageSize){
+		logger.info("进入BrandController-searchBrands方法");
+		PageResult result = brand.searchBrands(brandinfo, pageNum, pageSize);
+		return result;
 	}
 }

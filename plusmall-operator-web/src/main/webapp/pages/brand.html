@@ -40,7 +40,7 @@
             </div>
             <div class="box-tools pull-right">
                 <div class="has-feedback">
-                    品牌名称:<input ng-model="searchEntity.name"> 品牌首字母:<input ng-model="searchEntity.firstChar">  <button class="btn btn-default" ng-click="reloadList()">查询</button>
+                    品牌名称:<input ng-model="searchBrand.name"> 品牌首字母:<input ng-model="searchBrand.firstChar">  <button class="btn btn-default" ng-click="reloadList()">查询</button>
                 </div>
             </div>
             <!--工具栏/-->
@@ -139,9 +139,9 @@
                 }
             }
 
-
-            $scope.findPage=function(pageNum,pageSize){
-                $http.get('../brand/getPage.do?pageNum='+pageNum+'&pageSize='+pageSize).success(
+            $scope.searchBrand={};
+            $scope.search=function(pageNum,pageSize){
+                $http.post('../brand/search.do?pageNum='+pageNum+'&pageSize='+pageSize,$scope.searchBrand).success(
                     function (callback) {
                         $scope.result = callback.result;
                         $scope.paginationConf.totalItems = callback.total;
@@ -151,8 +151,8 @@
 
             $scope.reloadList=function(){
                 //切换页码
-                $scope.findPage($scope.paginationConf.currentPage,
-                    $scope.paginationConf.itemsPerPage)
+                $scope.search($scope.paginationConf.currentPage,
+                    $scope.paginationConf.itemsPerPage);
             }
 
             //分页控件配置

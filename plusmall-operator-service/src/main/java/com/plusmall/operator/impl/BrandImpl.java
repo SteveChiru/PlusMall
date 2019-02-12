@@ -7,6 +7,7 @@ import com.plusmall.commons.PageResult;
 import com.plusmall.mapper.TbBrandMapper;
 import com.plusmall.model.TbBrand;
 import com.plusmall.model.TbBrandExample;
+import com.plusmall.model.TbBrandExample.Criteria;
 import com.plusmall.operator.Brand;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,14 +24,6 @@ public class BrandImpl implements Brand {
 
 	@Autowired
 	private TbBrandMapper brandMapper;
-
-	@Override
-	public PageResult getBrandsPerPae(int pageNum, int pageSize) {
-		logger.info("进入服务层-getBrandsPerPage方法");
-		PageHelper.startPage(pageNum,pageSize);
-		Page<TbBrand> page = (Page<TbBrand>) brandMapper.selectByExample(null);
-		return new PageResult(page.getTotal(),page.getPages(),page.getPageSize(),page.getResult());
-	}
 
 	@Override
 	public void add(TbBrand brand) {
@@ -57,5 +50,23 @@ public class BrandImpl implements Brand {
 		for (Long id : ids){
 			brandMapper.deleteByPrimaryKey(id);
 		}
+	}
+
+	@Override
+	public PageResult searchBrands(TbBrand brandinfo, int pageNum, int pageSize) {
+		logger.info("进入服务层-searchBrands方法");
+		PageHelper.startPage(pageNum,pageSize);
+		TbBrandExample example = new TbBrandExample();
+		Criteria criteria = example.createCriteria();
+		if (brandinfo != null){
+			if (brandinfo.getName() != null && brandinfo.getName().length() > 0){
+				criteria.andNameLike("%"+brandinfo.getName()+"%");
+			}
+			if (brandinfo.getFirstChar() != null && brandinfo.getFirstChar().length() >0){
+				criteria.andFirstCharEqualTo(brandinfo.getFirstChar());
+			}
+		}
+		Page<TbBrand> page = (Page<TbBrand>) brandMapper.selectByExample(example);
+		return new PageResult(page.getTotal(),page.getPages(),page.getPageSize(),page.getResult());
 	}
 }
