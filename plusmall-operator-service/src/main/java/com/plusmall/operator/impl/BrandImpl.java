@@ -50,4 +50,12 @@ public class BrandImpl implements Brand {
 		logger.info("进入服务层-update方法");
 		brandMapper.updateByPrimaryKey(brand);
 	}
+
+	@Override
+	public void delete(Long[] ids) {
+		logger.info("进入服务层-delete方法");
+		for (Long id : ids){
+			brandMapper.deleteByPrimaryKey(id);
+		}
+	}
 }

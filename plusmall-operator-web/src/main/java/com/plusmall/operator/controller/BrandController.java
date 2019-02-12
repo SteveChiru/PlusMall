@@ -64,4 +64,19 @@ public class BrandController {
 			return actionResult;
 		}
 	}
+
+	@RequestMapping("/delete")
+	public ActionResult deleteBrand(Long[] ids){
+		logger.info("进入BrandController-delete方法");
+		try {
+			System.out.println(ids);
+			brand.delete(ids);
+			actionResult = new ActionResult(true,"删除品牌成功");
+		}catch (Exception e){
+			e.printStackTrace();
+			actionResult = new ActionResult(false,"删除品牌失败");
+		}finally {
+			return actionResult;
+		}
+	}
 }

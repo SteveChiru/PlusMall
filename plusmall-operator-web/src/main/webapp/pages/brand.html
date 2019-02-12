@@ -33,7 +33,7 @@
                 <div class="form-group form-inline">
                     <div class="btn-group">
                         <button type="button" class="btn btn-default" title="新建" data-toggle="modal" data-target="#editModal" ng-click="brand={}" ><i class="fa fa-file-o"></i> 新建</button>
-                        <button type="button" class="btn btn-default" title="删除" ng-click="dele()"><i class="fa fa-trash-o"></i> 删除</button>
+                        <button type="button" class="btn btn-default" title="删除" ng-click="delete()"><i class="fa fa-trash-o"></i> 删除</button>
                         <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="brand in result">
-                        <td><input  type="checkbox"></td>
+                        <td><input  type="checkbox" ng-click="updateSelection($event,brand.id)"></td>
                         <td>{{brand.id}}</td>
                         <td>{{brand.name}}</td>
                         <td>{{brand.firstChar}}</td>
@@ -113,6 +113,33 @@
         var app = angular.module("plusmall",['pagination']);
 
         app.controller("brandController",function ($scope, $http) {
+
+            $scope.idsSelected=[];
+            
+            $scope.updateSelection=function($event,id){
+                if ($event.target.checked) {
+                    $scope.idsSelected.push(id);
+                }else{
+                    var idx = $scope.idsSelected.indexOf(id);
+                    $scope.idsSelected.splice(idx,1)
+                }
+            }
+
+            $scope.delete=function(){
+                if (confirm("确定要删除所选品牌信息？")){
+                    $http.get('../brand/delete.do?ids='+$scope.idsSelected).success(
+                        function (callback) {
+                            if (callback.success) {
+                                $scope.reloadList();
+                            }else {
+                                alert(callback.msg);
+                            }
+                        }
+                    );
+                }
+            }
+
+
             $scope.findPage=function(pageNum,pageSize){
                 $http.get('../brand/getPage.do?pageNum='+pageNum+'&pageSize='+pageSize).success(
                     function (callback) {
@@ -138,14 +165,14 @@
                     $scope.reloadList();//重新加载
                 }
             }
-            
+
             //添加brand到数据库
             $scope.save=function () {
                 var action="addBrand";
                 if ($scope.brand.id != null){
                     action="updateBrand";
                 }
-                
+
                 $http.post('../brand/'+action+'.do',$scope.brand).success(
                     function (callback) {
                         //添加成功
