@@ -7,6 +7,7 @@ import com.plusmall.model.TbSpecification;
 import com.plusmall.model.TbSpecificationOption;
 import com.plusmall.operator.SpecOptionService;
 import com.plusmall.operator.SpecificationService;
+import com.plusmall.pojogroup.Specification;
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,13 +43,13 @@ public class SpecificationController {
 	}
 
 	@RequestMapping("/add")
-	public ActionResult addSpec(@RequestBody TbSpecification spec, List<TbSpecificationOption> specOptionList){
+	public ActionResult addSpec(@RequestBody Specification spec){
 		logger.info(logStr+"addSpec方法");
 		try {
 			//添加spec
-			specService.add(spec);
+			specService.add(spec.getSpecification());
 			//添加specOption
-			for (TbSpecificationOption specOption: specOptionList){
+			for (TbSpecificationOption specOption: spec.getSpecOptionsList()){
 				specOptionService.add(specOption);
 			}
 			actionResult = new ActionResult(true,"添加规格成功");
@@ -68,6 +69,26 @@ public class SpecificationController {
 		}catch (NullPointerException e){
 			e.printStackTrace();
 			actionResult = new ActionResult(false,"删除规格失败");
+		}
+		return actionResult;
+	}
+
+	@RequestMapping("/findOne")
+	public Specification findOne(Long id){
+		logger.info(logStr+"findOne方法");
+		Specification spec = specService.getSpecificationById(id);
+		return spec;
+	}
+
+	@RequestMapping("/update")
+	public ActionResult updateSpec(Specification spec){
+		logger.info(logStr+"updateSpec方法");
+		try {
+			specService.update(spec);
+			actionResult = new ActionResult(true,"更新规格成功");
+		}catch (NullPointerException e){
+			e.printStackTrace();
+			actionResult = new ActionResult(false,"更新规格失败");
 		}
 		return actionResult;
 	}

@@ -8,8 +8,10 @@ import com.plusmall.mapper.TbSpecificationMapper;
 import com.plusmall.mapper.TbSpecificationOptionMapper;
 import com.plusmall.model.TbSpecification;
 import com.plusmall.model.TbSpecificationExample;
+import com.plusmall.model.TbSpecificationOption;
 import com.plusmall.model.TbSpecificationOptionExample;
 import com.plusmall.operator.SpecificationService;
+import com.plusmall.pojogroup.Specification;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -36,16 +38,32 @@ public class SpecificationServiceImpl implements SpecificationService {
 	}
 
 	@Override
-	public TbSpecification getSpecificationById(Long id) throws NullPointerException{
+	public Specification getSpecificationById(Long id) {
 		logger.info(logStr+"getSpecificationById方法");
+		Specification spec = new Specification();
 		TbSpecification tbSpecification = specificationMapper.selectByPrimaryKey(id);
-		return tbSpecification;
+		spec.setSpecification(tbSpecification);
+		TbSpecificationOptionExample example = new TbSpecificationOptionExample();
+		TbSpecificationOptionExample.Criteria criteria = example.createCriteria();
+		criteria.andSpecIdEqualTo(id);
+		List<TbSpecificationOption> specOptionsList = specOptionMapper.selectByExample(example);
+		spec.setSpecOptionsList(specOptionsList);
+		return spec;
 	}
 
 	@Override
-	public void update(TbSpecification specification) throws NullPointerException{
+	public void update(Specification spec) throws NullPointerException{
 		logger.info(logStr+"update方法");
-		specificationMapper.updateByPrimaryKey(specification);
+		specificationMapper.updateByPrimaryKey(spec.getSpecification());
+		//更新spec的方法：先删除，再插入
+		TbSpecificationOptionExample example = new TbSpecificationOptionExample();
+		TbSpecificationOptionExample.Criteria criteria = example.createCriteria();
+		criteria.andSpecIdEqualTo(spec.getSpecification().getId());
+		specOptionMapper.deleteByExample(example);
+
+		for (TbSpecificationOption specOption: spec.getSpecOptionsList()){
+			specOptionMapper.insert(specOption);
+		}
 	}
 
 	@Override
