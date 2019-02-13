@@ -51,16 +51,58 @@ public class SpecOptionServiceImpl implements SpecOptionService {
 		}
 	}
 
+	/**
+	 * 查找符合条件的规格选项并封装成PageResult返回
+	 * @param specOption
+	 * @param pageNum
+	 * @param pageSize
+	 * @return
+	 */
 	@Override
 	public PageResult searchSpecOptions(TbSpecificationOption specOption, int pageNum, int pageSize) {
 		logger.info(logStr+"searchSpecOptions方法");
 		TbSpecificationOptionExample example = new TbSpecificationOptionExample();
 		Criteria criteria = example.createCriteria();
+		if (specOption.getSpecId() != null){
+			criteria.andSpecIdEqualTo(specOption.getSpecId());
+		}
 		if (specOption.getOptionName() != null && specOption.getOptionName().length() > 0){
 			criteria.andOptionNameLike("%"+specOption.getOptionName()+"%");
+		}
+		if (specOption.getId() != null){
+			criteria.andIdEqualTo(specOption.getId());
+		}
+		if (specOption.getOrders() != null){
+			criteria.andOrdersEqualTo(specOption.getOrders());
 		}
 		List<TbSpecificationOption> specOptionList = specOptionMapper.selectByExample(example);
 		Page<TbSpecificationOption> page = (Page<TbSpecificationOption>) specOptionList;
 		return new PageResult(page.getTotal(),page.getPages(),page.getPageSize(),page.getResult());
+	}
+
+	/**
+	 * 查找符合条件的规格选项
+	 * @param specOption
+	 * @return
+	 */
+	@Override
+	public List<TbSpecificationOption> searchSpecOptions(TbSpecificationOption specOption) throws NullPointerException{
+		logger.info(logStr+"searchSpecOptions方法");
+		TbSpecificationOptionExample example = new TbSpecificationOptionExample();
+		Criteria criteria = example.createCriteria();
+		if (specOption.getSpecId() != null){
+			criteria.andSpecIdEqualTo(specOption.getSpecId());
+		}
+		if (specOption.getOptionName() != null && specOption.getOptionName().length() > 0){
+			criteria.andOptionNameLike("%"+specOption.getOptionName()+"%");
+		}
+		if (specOption.getId() != null){
+			criteria.andIdEqualTo(specOption.getId());
+		}
+		if (specOption.getOrders() != null){
+			criteria.andOrdersEqualTo(specOption.getOrders());
+		}
+		List<TbSpecificationOption> specOptionList = specOptionMapper.selectByExample(example);
+		return specOptionList;
 	}
 }

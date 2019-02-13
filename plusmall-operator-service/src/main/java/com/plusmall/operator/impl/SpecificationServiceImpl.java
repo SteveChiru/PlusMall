@@ -1,17 +1,22 @@
 package com.plusmall.operator.impl;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.plusmall.commons.PageResult;
 import com.plusmall.mapper.TbSpecificationMapper;
+import com.plusmall.mapper.TbSpecificationOptionMapper;
 import com.plusmall.model.TbSpecification;
 import com.plusmall.model.TbSpecificationExample;
 import com.plusmall.model.TbSpecificationExample.Criteria;
+import com.plusmall.model.TbSpecificationOption;
+import com.plusmall.operator.SpecOptionService;
 import com.plusmall.operator.SpecificationService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,6 +29,8 @@ public class SpecificationServiceImpl implements SpecificationService {
 
 	@Autowired
 	private TbSpecificationMapper specificationMapper;
+	@Reference
+	private SpecOptionService specOptionService;
 
 	@Override
 	public void add(TbSpecification specification) throws NullPointerException{
@@ -49,6 +56,17 @@ public class SpecificationServiceImpl implements SpecificationService {
 		logger.info(logStr+"delete方法");
 		for (Long id : ids){
 			specificationMapper.deleteByPrimaryKey(id);
+			//删除规格选项
+			//1.根据specid找到specOptions
+			TbSpecificationOption specOptionQuery = new TbSpecificationOption();
+			specOptionQuery.setSpecId(id);
+			List<TbSpecificationOption> specOptionsToDeleteList = specOptionService.searchSpecOptions(specOptionQuery);
+			List<Long> idsToDeleteList = new ArrayList<>();
+			for (TbSpecificationOption specOption: specOptionsToDeleteList){
+				idsToDeleteList.add(specOption.getId());
+			}
+			Long[] idArray = new Long[idsToDeleteList.size()];
+			specOptionService.delete(idArray);
 		}
 	}
 
