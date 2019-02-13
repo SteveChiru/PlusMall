@@ -12,6 +12,9 @@ public class PageResult implements Serializable {
 	private Integer size;
 	private List result;
 
+	public PageResult() {
+	}
+
 	public PageResult(Long total, Integer pages, Integer size, List result) {
 		this.total = total;
 		this.pages = pages;
