@@ -6,7 +6,7 @@ app.service('specService',function ($http) {
 
    //查找
     this.search=function (pageNum, pageSize, searchEntity) {
-        return $http.post('../brand/search.do?pageNum='+pageNum+'&pageSize='+pageSize,searchEntity);
+        return $http.post('../specification/search.do?pageNum='+pageNum+'&pageSize='+pageSize,searchEntity);
     }
 
     //新增

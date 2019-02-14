@@ -4,7 +4,7 @@ app.controller('specController',function ($scope, $controller, specService) {
     //查找
     $scope.searchSpec={};
     $scope.search=function (pageNum, pageSize) {
-        brandService.search(pageNum,pageSize,$scope.searchSpec).success(
+        specService.search(pageNum,pageSize,$scope.searchSpec).success(
             function (callback) {
                 $scope.result = callback.result;
                 $scope.paginationConf.totalItems = callback.total;
@@ -15,7 +15,7 @@ app.controller('specController',function ($scope, $controller, specService) {
     //删除
     $scope.delete=function () {
         if (confirm("确定要删除所选规格信息？")) {
-            brandService.delete($scope.idsSelected).success(
+            specService.delete($scope.idsSelected).success(
                 function (callback) {
                     if (callback.success) {
                         $scope.reloadList();
@@ -40,7 +40,7 @@ app.controller('specController',function ($scope, $controller, specService) {
     //保存
     $scope.save=function () {
         var serviceObject;
-        if ($scope.brand.id != null){
+        if ($scope.specPojo.specification.id != null){
             serviceObject = specService.update($scope.specPojo);
         }else {
             serviceObject = specService.add($scope.specPojo);
@@ -59,7 +59,7 @@ app.controller('specController',function ($scope, $controller, specService) {
     //修改
     //根据id查找单个brand的数据
     $scope.findOne=function (id) {
-        brandService.findOne(id).success(
+        specService.findOne(id).success(
             function (callback) {
                 $scope.specPojo = callback;
             }

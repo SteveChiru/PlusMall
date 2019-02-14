@@ -47,11 +47,7 @@ public class SpecificationController {
 		logger.info(logStr+"addSpec方法");
 		try {
 			//添加spec
-			specService.add(spec.getSpecification());
-			//添加specOption
-			for (TbSpecificationOption specOption: spec.getSpecOptionsList()){
-				specOptionService.add(specOption);
-			}
+			specService.add(spec);	//此处应该添加事务处理：规格和规格选项都添加成功才算成功
 			actionResult = new ActionResult(true,"添加规格成功");
 		}catch (NullPointerException e){
 			e.printStackTrace();
@@ -81,7 +77,7 @@ public class SpecificationController {
 	}
 
 	@RequestMapping("/update")
-	public ActionResult updateSpec(Specification spec){
+	public ActionResult updateSpec(@RequestBody Specification spec){
 		logger.info(logStr+"updateSpec方法");
 		try {
 			specService.update(spec);

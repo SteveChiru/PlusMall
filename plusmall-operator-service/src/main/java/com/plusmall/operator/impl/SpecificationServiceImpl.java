@@ -32,9 +32,22 @@ public class SpecificationServiceImpl implements SpecificationService {
 	private TbSpecificationOptionMapper specOptionMapper;
 
 	@Override
-	public void add(TbSpecification specification) throws NullPointerException{
+	public void add(Specification spec) throws NullPointerException{
 		logger.info(logStr+"add方法");
-		specificationMapper.insert(specification);
+		specificationMapper.insert(spec.getSpecification());
+
+		TbSpecificationExample example = new TbSpecificationExample();
+		TbSpecificationExample.Criteria criteria = example.createCriteria();
+		criteria.andSpecNameEqualTo(spec.getSpecification().getSpecName());
+		List<TbSpecification> tbSpecifications = specificationMapper.selectByExample(example);
+		//规格唯一时，才能插入规格选项
+		if (tbSpecifications.size() == 1){
+			Long specId = tbSpecifications.get(0).getId();
+			for (TbSpecificationOption specOption: spec.getSpecOptionsList()){
+				specOption.setSpecId(specId);
+				specOptionMapper.insert(specOption);
+			}
+		}
 	}
 
 	@Override
@@ -81,14 +94,14 @@ public class SpecificationServiceImpl implements SpecificationService {
 	@Override
 	public PageResult searchSpecifications(TbSpecification specification, int pageNum, int pageSize) throws NullPointerException{
 		logger.info(logStr+"searchSpecifications");
+		//用PageHelper插件将查询结果封装成page
+		PageHelper.startPage(pageNum,pageSize);
 		TbSpecificationExample example = new TbSpecificationExample();
 		TbSpecificationExample.Criteria criteria = example.createCriteria();
 		if (specification.getSpecName() != null && specification.getSpecName().length() > 0){
 			criteria.andSpecNameLike("%"+specification.getSpecName()+"%");
 		}
 		List<TbSpecification> tbSpecifications = specificationMapper.selectByExample(example);
-		//用PageHelper插件将查询结果封装成page
-		PageHelper.startPage(pageNum,pageSize);
 		Page<TbSpecification> page = (Page<TbSpecification>) tbSpecifications;
 		//将Page对象封装成PageResult对象返回
 		return new PageResult(page.getTotal(),page.getPages(),page.getPageSize(),page.getResult());

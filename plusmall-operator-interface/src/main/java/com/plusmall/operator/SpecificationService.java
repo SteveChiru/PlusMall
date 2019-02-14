@@ -8,7 +8,7 @@ import com.plusmall.pojogroup.Specification;
  * @Description:
  */
 public interface SpecificationService {
-	public void add(TbSpecification specification);
+	public void add(Specification specification);
 	public Specification getSpecificationById(Long id);
 	public void update(Specification specification);
 	public void delete(Long[] ids);
