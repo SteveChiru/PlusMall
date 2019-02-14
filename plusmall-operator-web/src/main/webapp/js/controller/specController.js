@@ -31,7 +31,8 @@ app.controller('specController',function ($scope, $controller, specService) {
     $scope.specPojo={specOptionsList:[]};
     //新增选项行
     $scope.addTableRow=function () {
-        $scope.specPojo.specOptionsList.push({});
+        $scope.specPojo.specOptionsList.push({
+            'specId':$scope.specPojo.specification.id});
     }
     //批量选项删除
     $scope.deleTableRow=function (index) {
