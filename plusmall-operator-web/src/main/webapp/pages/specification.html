@@ -19,7 +19,10 @@
 	<script src="../plugins/angularjs/pagination.js"></script>
 
     <!--引入JS代码-->
-
+    <script type="text/javascript" src="../js/base/base_pagination.js"></script>
+    <script type="text/javascript" src="../js/service/specService.js"></script>
+    <script type="text/javascript" src="../js/controller/baseController.js"></script>
+    <script type="text/javascript" src="../js/controller/specController.js"></script>
     
 </head>
 
@@ -35,7 +38,7 @@
             <div class="pull-left">
                 <div class="form-group form-inline">
                     <div class="btn-group">
-                        <button type="button" class="btn btn-default" title="新建" data-toggle="modal" data-target="#editModal" ng-click="specEntity={'specOptionsList':[]}"><i class="fa fa-file-o"></i> 新建</button>
+                        <button type="button" class="btn btn-default" title="新建" data-toggle="modal" data-target="#editModal" ng-click="specPojo={'specOptionsList':[]}"><i class="fa fa-file-o"></i> 新建</button>
                         <button type="button" class="btn btn-default" title="删除" ng-click="delete()"><i class="fa fa-trash-o"></i> 删除</button>
                         <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
                     </div>
@@ -90,7 +93,7 @@
                         <tr>
                             <td>规格名称</td>
                             <td>
-                                <input ng-model="entity.specification.specName" class="form-control" placeholder="规格名称" >
+                                <input ng-model="specPojo.specification.specName" class="form-control" placeholder="规格名称" >
                             </td>
                         </tr>
                     </table>
@@ -109,12 +112,12 @@
                             </tr>>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="pojo in entity.specificationOptionList">
+                            <tr ng-repeat="specOption in specPojo.specOptionsList">
                                 <td>
-                                    <input  class="form-control" placeholder="规格选项" ng-model="pojo.optionName">
+                                    <input  class="form-control" placeholder="规格选项" ng-model="specOption.optionName">
                                 </td>
                                 <td>
-                                    <input  class="form-control" placeholder="排序" ng-model="pojo.orders">
+                                    <input  class="form-control" placeholder="排序" ng-model="specOption.orders">
                                 </td>
                                 <td>
                                     <button type="button" class="btn btn-default" title="删除" ng-click="deleTableRow($index)"><i class="fa fa-trash-o"></i> 删除</button>
