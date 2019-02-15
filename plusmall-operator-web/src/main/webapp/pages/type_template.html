@@ -12,21 +12,25 @@
     <link rel="stylesheet" href="../plugins/adminLTE/css/AdminLTE.css">
     <link rel="stylesheet" href="../plugins/adminLTE/css/skins/_all-skins.min.css">
     <link rel="stylesheet" href="../plugins/angularjs/pagination.css">
+    <link rel="stylesheet" href="../plugins/select2/select2.css">
+    <link rel="stylesheet" href="../plugins/select2/select2-bootstrap.css">
     <!--引入JS框架-->
     <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
     <script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="../plugins/angularjs/angular.min.js"></script>
     <script src="../plugins/angularjs/pagination.js"></script>
-
+    <script type="text/javascript" src="../plugins/select2/select2.min.js"></script>
     <!--引入JS代码-->
     <script type="text/javascript" src="../js/base/base_pagination.js"></script>
+    <script type="text/javascript" src="../plugins/select2/angular-select2.js"></script>
     <script type="text/javascript" src="../js/service/typeTempService.js"></script>
+    <script type="text/javascript" src="../js/service/brandService.js"></script>
     <script type="text/javascript" src="../js/controller/baseController.js"></script>
     <script type="text/javascript" src="../js/controller/typeTempController.js"></script>
 
 </head>
 
-<body class="hold-transition skin-red sidebar-mini" ng-app="plusmall" ng-controller="typeTempController">
+<body class="hold-transition skin-red sidebar-mini" ng-app="plusmall" ng-controller="typeTempController" ng-init="findBrandList()">
                 
     <div class="box-header with-border">
         <h3 class="box-title">商品类型模板管理</h3>
@@ -119,7 +123,6 @@
                                 <table class="table table-bordered table-striped"  width="800px">
                                     <thead>
                                     <tr>
-                                        <td><input type="checkbox" class="icheckbox_square-blue"></td>
                                         <td>属性名称</td>
                                         <td>操作</td>
                                     </tr>

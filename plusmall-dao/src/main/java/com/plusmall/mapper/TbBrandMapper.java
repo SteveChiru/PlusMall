@@ -3,6 +3,8 @@ package com.plusmall.mapper;
 import com.plusmall.model.TbBrand;
 import com.plusmall.model.TbBrandExample;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface TbBrandMapper {
@@ -93,4 +95,10 @@ public interface TbBrandMapper {
      * @mbggenerated Sun Feb 10 10:57:24 CST 2019
      */
     int updateByPrimaryKey(TbBrand record);
+
+	/**
+	 * 返回所有的品牌信息
+	 * @return
+	 */
+	List<Map> selectOptionList();
 }

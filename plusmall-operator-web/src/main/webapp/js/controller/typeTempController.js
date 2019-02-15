@@ -1,4 +1,4 @@
-app.controller('typeTempController',function ($scope, $controller, typeTempService) {
+app.controller('typeTempController',function ($scope, $controller, typeTempService,brandService) {
     $controller('baseController',{$scope:$scope});
 
     //查找
@@ -17,7 +17,7 @@ app.controller('typeTempController',function ($scope, $controller, typeTempServi
         typeTempService.delete($scope.idsSelected).success(
             function (callback) {
                 if (callback.success){
-                    reloadList();
+                    $scope.reloadList();
                 } else {
                     alert(callback.msg);
                 }
@@ -25,9 +25,13 @@ app.controller('typeTempController',function ($scope, $controller, typeTempServi
         );
     }
 
-    //新增选项行
+    //新增行
     $scope.addTableRow=function () {
         $scope.typeTemp.customAttributeItems.push({});
+    }
+    //删除行
+    $scope.deleTableRow=function (index) {
+        $scope.typeTemp.customAttributeItems.splice(index,1);//删除
     }
 
     //保存：包括新建和更新
@@ -41,7 +45,7 @@ app.controller('typeTempController',function ($scope, $controller, typeTempServi
         serviceObj.success(
             function (callback) {
                 if (callback.success){
-                    reloadList();
+                    $scope.reloadList();
                 }else {
                     alert(callback.msg);
                 }
@@ -53,9 +57,23 @@ app.controller('typeTempController',function ($scope, $controller, typeTempServi
     $scope.findOne=function (id) {
         typeTempService.findOne(id).success(
             function (callback) {
-                $scope.typeTempToUpdate=callback;
+                $scope.typeTemp=callback;
+                $scope.typeTemp.brandIds = JSON.parse($scope.typeTemp.brandIds);
+                $scope.typeTemp.specIds = JSON.parse($scope.typeTemp.specIds);
+                $scope.typeTemp.customAttributeItems = JSON.parse($scope.typeTemp.customAttributeItems);
             }
         );
     }
 
+    $scope.brandList={data:[]};//品牌列表
+    $scope.findBrandList=function(){
+        brandService.selectOptionList().success(
+            function (callback) {
+                $scope.brandList={data:callback};
+            }
+        );
+    }
+
+
+    $scope.specList={data:[]};//规格列表
 });

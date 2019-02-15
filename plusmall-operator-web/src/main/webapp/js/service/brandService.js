@@ -23,4 +23,9 @@ app.service('brandService',function ($http) {
     this.findOne=function (id) {
         return $http.get('../brand/findOne.do?id='+id);
     }
+
+    //获取所有的品牌信息
+    this.selectOptionList=function () {
+        return $http.get('../brand/selectOptionList.do');
+    }
 });

@@ -12,6 +12,9 @@ import com.plusmall.operator.BrandService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @Description:
  */
@@ -66,5 +69,10 @@ public class BrandServiceImpl implements BrandService {
 		}
 		Page<TbBrand> page = (Page<TbBrand>) brandMapper.selectByExample(example);
 		return new PageResult(page.getTotal(),page.getPages(),page.getPageSize(),page.getResult());
+	}
+
+	@Override
+	public List<Map> selectOptionList() {
+		return brandMapper.selectOptionList();
 	}
 }

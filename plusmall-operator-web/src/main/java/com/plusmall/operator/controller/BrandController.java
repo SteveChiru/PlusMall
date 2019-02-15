@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @Description:
  */
@@ -78,5 +81,10 @@ public class BrandController {
 		logger.info("进入BrandController-searchBrands方法");
 		PageResult result = brandService.searchBrands(brandinfo, pageNum, pageSize);
 		return result;
+	}
+
+	@RequestMapping("/selectOptionList")
+	public List<Map> selecOptionList(){
+		return brandService.selectOptionList();
 	}
 }
