@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Description:
@@ -105,5 +106,10 @@ public class SpecificationServiceImpl implements SpecificationService {
 		Page<TbSpecification> page = (Page<TbSpecification>) tbSpecifications;
 		//将Page对象封装成PageResult对象返回
 		return new PageResult(page.getTotal(),page.getPages(),page.getPageSize(),page.getResult());
+	}
+
+	@Override
+	public List<Map> selectOptionList() {
+		return specificationMapper.selectOptionList();
 	}
 }

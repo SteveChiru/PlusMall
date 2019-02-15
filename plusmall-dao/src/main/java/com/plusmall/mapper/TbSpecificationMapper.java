@@ -3,6 +3,8 @@ package com.plusmall.mapper;
 import com.plusmall.model.TbSpecification;
 import com.plusmall.model.TbSpecificationExample;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface TbSpecificationMapper {
@@ -93,4 +95,10 @@ public interface TbSpecificationMapper {
      * @mbggenerated Tue Feb 12 21:01:48 CST 2019
      */
     int updateByPrimaryKey(TbSpecification record);
+
+	/**
+	 * 返回所有的规格信息
+	 * @return
+	 */
+	List<Map> selectOptionList();
 }

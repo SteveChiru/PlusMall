@@ -23,4 +23,9 @@ app.service('specService',function ($http) {
     this.update=function (specPojo) {
         return $http.post('../specification/update.do',specPojo);
     }
+
+    //获取所有的规格信息
+    this.selectOptionList=function () {
+        return $http.get('../specification/selectOptionList.do');
+    }
 });

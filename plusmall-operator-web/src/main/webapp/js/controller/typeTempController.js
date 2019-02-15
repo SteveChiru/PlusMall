@@ -1,4 +1,4 @@
-app.controller('typeTempController',function ($scope, $controller, typeTempService,brandService) {
+app.controller('typeTempController',function ($scope, $controller, typeTempService,brandService,specService) {
     $controller('baseController',{$scope:$scope});
 
     //查找
@@ -74,6 +74,12 @@ app.controller('typeTempController',function ($scope, $controller, typeTempServi
         );
     }
 
-
     $scope.specList={data:[]};//规格列表
+    $scope.findSpecList=function () {
+        specService.selectOptionList().success(
+            function (callback) {
+                $scope.specList={data:callback};
+            }
+        );
+    }
 });

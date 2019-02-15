@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Description:
@@ -87,5 +88,10 @@ public class SpecificationController {
 			actionResult = new ActionResult(false,"更新规格失败");
 		}
 		return actionResult;
+	}
+
+	@RequestMapping("/selectOptionList")
+	public List<Map> selecOptionList(){
+		return specService.selectOptionList();
 	}
 }
