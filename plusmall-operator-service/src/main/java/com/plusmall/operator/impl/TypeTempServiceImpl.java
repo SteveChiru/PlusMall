@@ -25,12 +25,14 @@ public class TypeTempServiceImpl implements TypeTempService {
 	private TbTypeTemplateMapper typeTempMapper;
 
 	@Override
-	public PageResult search(int pageNum, int pageSize, TbTypeTemplate typeTemplate) throws NullPointerException {
+	public PageResult search(int pageNum, int pageSize, TbTypeTemplate typeTemplate) {
 		logger.info(logStr+"search方法");
 		PageHelper.startPage(pageNum,pageSize);
 		TbTypeTemplateExample example = new TbTypeTemplateExample();
 		TbTypeTemplateExample.Criteria criteria = example.createCriteria();
-		criteria.andNameLike(typeTemplate.getName());
+		if (typeTemplate.getName() != null && typeTemplate.getName().length() > 0){
+			criteria.andNameLike(typeTemplate.getName());
+		}
 		List<TbTypeTemplate> typeTempsList = typeTempMapper.selectByExample(example);
 		Page<TbTypeTemplate> page = (Page<TbTypeTemplate>) typeTempsList;
 		return new PageResult(page.getTotal(),page.getPages(),page.getPageSize(),page.getResult());

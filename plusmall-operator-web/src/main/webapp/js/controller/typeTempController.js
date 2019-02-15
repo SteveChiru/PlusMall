@@ -4,8 +4,8 @@ app.controller('typeTempController',function ($scope, $controller, typeTempServi
     //查找
     $scope.searchTypeTemp={};
     $scope.search=function (pageNum, pageSize) {
-        typeTempService.search(pageNum,pageSize,$scope.searchTypeTemp).success(
-            function (callback) {
+         typeTempService.search(pageNum,pageSize,$scope.searchTypeTemp).success(
+             function (callback) {
                 $scope.searchResult = callback.result;
                 $scope.paginationConf.totalItems = callback.total;
             }

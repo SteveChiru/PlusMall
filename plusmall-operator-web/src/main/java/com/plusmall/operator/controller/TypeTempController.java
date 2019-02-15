@@ -28,12 +28,7 @@ public class TypeTempController {
 	@RequestMapping("/search")
 	public PageResult search(int pageNum,int pageSize,@RequestBody TbTypeTemplate typeTemplate){
 		logger.info(logStr+"search方法");
-		try {
-			pageResult = typeTempService.search(pageNum, pageSize, typeTemplate);
-		}catch (NullPointerException e){
-			e.printStackTrace();
-		}
-		return pageResult;
+		return typeTempService.search(pageNum, pageSize, typeTemplate);
 	}
 
 	@RequestMapping("/delete")
