@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
-    <!--过滤器-->
+    <!--字符过滤器-->
     <filter>
         <filter-name>CharacterEncodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -17,6 +17,9 @@
         <filter-name>CharacterEncodingFilter</filter-name>
         <url-pattern>*.action</url-pattern>
     </filter-mapping>
+
+    <!--安全认证过滤器-->
+
 
     <!--前端控制器-->
     <servlet>
