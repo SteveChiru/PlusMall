@@ -45,9 +45,12 @@ public class TypeTempController {
 	}
 
 	@RequestMapping("/add")
-	public ActionResult add(TbTypeTemplate typeTemplate){
+	public ActionResult add(@RequestBody TbTypeTemplate typeTemplate){
 		logger.info(logStr+"add方法");
 		try {
+			logger.info(typeTemplate.getBrandIds());
+			logger.info(typeTemplate.getSpecIds());
+			logger.info(typeTemplate.getCustomAttributeItems());
 			typeTempService.add(typeTemplate);
 			actionResult = new ActionResult(true,"新增类型模板成功");
 		}catch (NullPointerException e){
@@ -64,7 +67,7 @@ public class TypeTempController {
 	}
 
 	@RequestMapping("/update")
-	public ActionResult update(TbTypeTemplate typeTemplate){
+	public ActionResult update(@RequestBody TbTypeTemplate typeTemplate){
 		logger.info(logStr+"update方法");
 		try {
 			typeTempService.update(typeTemplate);

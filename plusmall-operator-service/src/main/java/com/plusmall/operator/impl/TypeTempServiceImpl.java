@@ -48,7 +48,7 @@ public class TypeTempServiceImpl implements TypeTempService {
 
 	@Override
 	public void add(TbTypeTemplate typeTemplate) throws NullPointerException{
-		logger.info(logStr+"save方法");
+		logger.info(logStr+"add方法");
 		typeTempMapper.insert(typeTemplate);
 	}
 

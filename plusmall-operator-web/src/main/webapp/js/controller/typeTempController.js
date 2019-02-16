@@ -37,6 +37,10 @@ app.controller('typeTempController',function ($scope, $controller, typeTempServi
     //保存：包括新建和更新
     $scope.save=function () {
         var serviceObj;
+        //将json对象转换为json字符串
+        $scope.typeTemp.brandIds = JSON.stringify($scope.typeTemp.brandIds);
+        $scope.typeTemp.specIds = JSON.stringify($scope.typeTemp.specIds);
+        $scope.typeTemp.customAttributeItems = JSON.stringify($scope.typeTemp.customAttributeItems);
         if ($scope.typeTemp.id!=null) {
             serviceObj = typeTempService.update($scope.typeTemp);
         }else {
@@ -58,7 +62,7 @@ app.controller('typeTempController',function ($scope, $controller, typeTempServi
         typeTempService.findOne(id).success(
             function (callback) {
                 $scope.typeTemp=callback;
-                $scope.typeTemp.brandIds = JSON.parse($scope.typeTemp.brandIds);
+                $scope.typeTemp.brandIds = JSON.parse($scope.typeTemp.brandIds);    //将json字符串转换为json对象
                 $scope.typeTemp.specIds = JSON.parse($scope.typeTemp.specIds);
                 $scope.typeTemp.customAttributeItems = JSON.parse($scope.typeTemp.customAttributeItems);
             }
