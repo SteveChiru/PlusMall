@@ -11,12 +11,12 @@
         <module>plusmall-operator-interface</module>
         <module>plusmall-operator-service</module>
         <module>plusmall-operator-web</module>
-        <module>plusmall-user-interface</module>
-        <module>plusmall-user-service</module>
-        <module>plusmall-user-web</module>
         <module>plusmall-dao</module>
         <module>plusmall-pojo</module>
         <module>plusmall-commons</module>
+        <module>plusmall-business-web</module>
+        <module>plusmall-business-interface</module>
+        <module>plusmall-business-service</module>
     </modules>
 
     <packaging>pom</packaging>

@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.plusmall</groupId>
-    <artifactId>plusmall-user-web</artifactId>
+    <artifactId>plusmall-business-service</artifactId>
     <version>1.0-SNAPSHOT</version>
 
 
