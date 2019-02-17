@@ -32,6 +32,7 @@ hs_err_pid*
 # target
 */target
 
-# database configuration
+# database configuration and security
 plusmall-commons/src/main/resources/mybatis-generator/generatorConfig.xml
 plusmall-dao/src/main/resources/db.properties
+plusmall-operator-web/src/main/resources/spring-security.xml

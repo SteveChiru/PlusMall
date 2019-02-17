@@ -6,21 +6,26 @@
     <meta charset="utf-8">
     <!-- 视区宽度为电脑的屏幕宽度，web页面初始缩放比例为1（不缩放）-->
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-
     <title>运营商后台管理系统</title>
-
+    <!-- 加载CSS文件 -->
     <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../plugins/adminLTE/css/AdminLTE.css">
     <link rel="stylesheet" href="../plugins/adminLTE/css/skins/_all-skins.min.css">
-    
+    <!-- 加载JS文件 -->
     <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
     <script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="../plugins/adminLTE/js/app.min.js"></script>
     <script src="../plugins/angularjs/angular.min.js"></script>
- 
+
+    <!-- 添加JS代码 -->
+    <script type="text/javascript" src="../js/base/base.js"></script>
+    <script type="text/javascript" src="../js/service/loginService.js"></script>
+    <script type="text/javascript" src="../js/controller/baseController.js"></script>
+    <script type="text/javascript" src="../js/controller/loginController.js"></script>
 </head>
 
-<body class="hold-transition skin-green sidebar-mini">
+<body class="hold-transition skin-green sidebar-mini" ng-app="plusmall" ng-controller="loginController"
+                ng-init="showLoginName()">
 
     <div class="wrapper">
 
@@ -47,7 +52,7 @@
                                     <img src="../images/user3-128x128.jpg" class="img-circle" alt="User Image">
 
                                     <p>
-                                       测试用户 
+                                       {{loginName}}
                                         <small>最后登录 11:20AM</small>
                                     </p>
                                 </li>
@@ -58,7 +63,7 @@
                                         <a href="#" class="btn btn-default btn-flat">修改密码</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="../logout" class="btn btn-default btn-flat">注销</a>
+                                        <a href="../logout.do" class="btn btn-default btn-flat">注销</a>
                                     </div>
                                 </li>
                             </ul>
