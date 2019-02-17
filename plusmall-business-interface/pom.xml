@@ -13,5 +13,27 @@
     <artifactId>plusmall-business-interface</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <dependencies>
+        <!-- 分页 -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+        </dependency>
+        <!-- pojo -->
+        <dependency>
+            <groupId>org.plusmall</groupId>
+            <artifactId>plusmall-pojo</artifactId>
+        </dependency>
+        <!-- dao -->
+        <dependency>
+            <groupId>org.plusmall</groupId>
+            <artifactId>plusmall-dao</artifactId>
+        </dependency>
+        <!-- commons -->
+        <dependency>
+            <groupId>org.plusmall</groupId>
+            <artifactId>plusmall-commons</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>
