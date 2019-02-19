@@ -5,6 +5,7 @@ import com.plusmall.business.SellerService;
 import com.plusmall.commons.ActionResult;
 import com.plusmall.model.TbSeller;
 import org.apache.log4j.Logger;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,7 +26,10 @@ public class SellerController {
 	@RequestMapping("/add")
 	public ActionResult addSeller(@RequestBody TbSeller seller){
 		logger.info(logStr+"add方法");
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		try {
+			String password = passwordEncoder.encode(seller.getPassword());
+			seller.setPassword(password);
 			sellerService.add(seller);
 			actionResult = new ActionResult(true,"新增商家成功");
 		}catch (NullPointerException e){

@@ -40,8 +40,9 @@ public class SellerServiceImpl implements SellerService {
 	}
 
 	@Override
-	public TbSeller findOne(Long id) {
-		return null;
+	public TbSeller findOne(String id) {
+		logger.info(logStr+"findOne方法");
+		return sellerMapper.selectByPrimaryKey(id);
 	}
 
 	@Override
