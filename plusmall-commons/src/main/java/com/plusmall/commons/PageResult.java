@@ -22,6 +22,11 @@ public class PageResult implements Serializable {
 		this.result = result;
 	}
 
+	public PageResult(Long total, List result) {
+		this.total = total;
+		this.result = result;
+	}
+
 	public Long getTotal() {
 		return total;
 	}
