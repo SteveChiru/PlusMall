@@ -1,4 +1,4 @@
-app.controller('goodsController',function ($scope, $controller, goodsService,itemCatService) {
+app.controller('goodsController',function ($scope, $controller, goodsService,itemCatService,typeTemplateService) {
     $controller('baseController',{$scope:$scope});
 
     //保存
@@ -51,6 +51,16 @@ app.controller('goodsController',function ($scope, $controller, goodsService,ite
         itemCatService.findOne(newValue).success(
             function (callback) {
                 $scope.goodsGroup.tbGoods.typeTemplateId = callback.typeId;     //更新模板ID
+            }
+        )
+    })
+
+    //模板ID选择后，更新品牌列表
+    $scope.$watch('goodsGroup.tbGoods.typeTemplateId',function (newValue, oldValue) {
+        typeTemplateService.findOne(newValue).success(
+            function (callback) {
+                $scope.typeTemplate=callback;
+                $scope.typeTemplate.brandIds=JSON.parse($scope.typeTemplate.brandIds);//品牌列表
             }
         )
     })
