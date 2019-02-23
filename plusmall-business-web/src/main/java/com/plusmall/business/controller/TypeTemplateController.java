@@ -7,6 +7,9 @@ import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @Description:
  */
@@ -23,5 +26,11 @@ public class TypeTemplateController {
 	public TbTypeTemplate findOne(Long id){
 		logger.info(logStr+"findOne方法");
 		return typeTemplateService.findOne(id);
+	}
+
+	@RequestMapping("findSpecList")
+	public List<Map> findSpecList(Long id){
+		logger.info(logStr+"findSpecList方法");
+		return typeTemplateService.findSpecList(id);
 	}
 }

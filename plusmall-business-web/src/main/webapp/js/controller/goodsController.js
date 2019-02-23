@@ -84,10 +84,15 @@ app.controller('goodsController',function ($scope, $controller,
                 function (callback) {
                     $scope.typeTemplate=callback;
                     $scope.typeTemplate.brandIds=JSON.parse($scope.typeTemplate.brandIds);//品牌列表
-                    // $scope.customAttributeItems=JSON.parse($scope.typeTemplate.customAttributeItems);   //扩展属性
                     $scope.goodsGroup.tbGoodsDesc.customAttributeItems=JSON.parse($scope.typeTemplate.customAttributeItems);
                 }
             );
+            //查询规格列表
+            typeTemplateService.findSpecList(newValue).success(
+                function (callback) {
+                    $scope.specList=callback
+                }
+            )
         }
     })
 
@@ -115,5 +120,25 @@ app.controller('goodsController',function ($scope, $controller,
     //列表中移除图片
     $scope.remove_image_entity=function (index) {
         $scope.goodsGroup.tbGoodsDesc.itemImages.splice(index,1);
+    }
+
+    $scope.updateSpecAttribute=function ($event,name,value) {
+        var object = $scope.searchObjectByKey(
+            $scope.goodsGroup.tbGoodsDesc.specificationItems,'attributeName',name);
+        if (object != null){
+            if ($event.target.checked){
+                object.attributeValue.push(value);
+            } else {    //取消勾选
+                object.attributeValue.splice(object.attributeValue.indexOf(value),1);
+                //如果选项都取消了，将此条记录移除
+                if (object.attributeValue.length==0){
+                    $scope.goodsGroup.tbGoodsDesc.specificationItems.splice(
+                        $scope.goodsGroup.tbGoodsDesc.specificationItems.indexOf(object),1);
+                }
+            }
+        }else {
+            $scope.goodsGroup.tbGoodsDesc.specificationItems.push(
+                {"attributeName":name,"attributeValue":[value]});
+        }
     }
 })
