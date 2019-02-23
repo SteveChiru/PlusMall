@@ -43,8 +43,9 @@
         <javassist.version>3.11.0.GA</javassist.version>
         <zkclient.version>0.1</zkclient.version>
         <mybatis-generator.version>1.3.2</mybatis-generator.version>
-        <fastdfs.version>1.2</fastdfs.version>
+        <fastdfs.version>1.27-SNAPSHOT</fastdfs.version>
         <commons-fileupload.version>1.3.3</commons-fileupload.version>
+        <commons-io.version>2.4</commons-io.version>
 
         <plusmall-pojo.version>1.0-SNAPSHOT</plusmall-pojo.version>
         <plusmall-dao.version>1.0-SNAPSHOT</plusmall-dao.version>
@@ -221,8 +222,8 @@
             </dependency>
             <!--fastDFS-->
             <dependency>
-                <groupId>org.csource.fastdfs</groupId>
-                <artifactId>fastdfs</artifactId>
+                <groupId>org.csource</groupId>
+                <artifactId>fastdfs-client-java</artifactId>
                 <version>${fastdfs.version}</version>
             </dependency>
             <!--fileupload-->
@@ -230,6 +231,11 @@
                 <groupId>commons-fileupload</groupId>
                 <artifactId>commons-fileupload</artifactId>
                 <version>${commons-fileupload.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
             </dependency>
 
             <!-- plusmall-pojo -->

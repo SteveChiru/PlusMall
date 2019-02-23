@@ -1,7 +1,6 @@
 package com.plusmall.business.controller;
 
 import com.plusmall.commons.ActionResult;
-import com.plusmall.commons.FastDFSClient;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;

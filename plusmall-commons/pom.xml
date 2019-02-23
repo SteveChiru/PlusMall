@@ -31,13 +31,27 @@
         </dependency>
         <!--fastDFS-->
         <dependency>
-            <groupId>org.csource.fastdfs</groupId>
-            <artifactId>fastdfs</artifactId>
+            <groupId>org.csource</groupId>
+            <artifactId>fastdfs-client-java</artifactId>
         </dependency>
         <!--fileupload-->
         <dependency>
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
+        </dependency>
+        <!--commons-io-->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
+        <!--Spring-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
         </dependency>
     </dependencies>
 
