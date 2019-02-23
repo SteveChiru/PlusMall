@@ -106,4 +106,14 @@ app.controller('goodsController',function ($scope, $controller,
             alert("上传发生错误");
         });
     }
+
+    //添加图片列表
+    $scope.add_image_entity=function () {
+        $scope.goodsGroup.tbGoodsDesc.itemImages.push($scope.imageUpload);
+    }
+
+    //列表中移除图片
+    $scope.remove_image_entity=function (index) {
+        $scope.goodsGroup.tbGoodsDesc.itemImages.splice(index,1);
+    }
 })

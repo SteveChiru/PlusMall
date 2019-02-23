@@ -139,7 +139,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="itemImage in goodsGroup.tbGoodsDesc.itemImages">
+                                    <tr ng-repeat="itemImage in goodsGroup.tbGoodsDesc.itemImages track by $index">
                                         <td>
                                             {{itemImage.color}}
                                         </td>

@@ -15,7 +15,7 @@ public class FastDFSUtil {
 	public static String uploadPic(String clientConf,byte[] pic,String name,long size) throws Exception{
 		//读取配置文件
 		ClientGlobal.init(clientConf);
-
+		System.out.println("ClientGlobal初始化成功");
 		//连接tracker的客户端
 		TrackerClient trackerClient = new TrackerClient();
 		TrackerServer trackerServer = trackerClient.getConnection();
