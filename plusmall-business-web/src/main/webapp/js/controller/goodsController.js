@@ -2,15 +2,21 @@ app.controller('goodsController',function ($scope, $controller,
                    goodsService,itemCatService,typeTemplateService,uploadService) {
     $controller('baseController',{$scope:$scope});
 
+    $scope.goodsGroup={tbGoods:{},tbGoodsDesc:{customAttributeItems:[],itemImages:[],specificationItems:[]}};//定义页面实体结构
+
     //保存
     $scope.save=function () {
         $scope.goodsGroup.tbGoodsDesc.introduction=editor.html();
+        //把JSON实体转换为string
+        $scope.goodsGroup.tbGoodsDesc.customAttributeItems=angular.toJson($scope.goodsGroup.tbGoodsDesc.customAttributeItems);
+        $scope.goodsGroup.tbGoodsDesc.itemImages=angular.toJson($scope.goodsGroup.tbGoodsDesc.itemImages);
+        $scope.goodsGroup.tbGoodsDesc.specificationItems=angular.toJson($scope.goodsGroup.tbGoodsDesc.specificationItems);
+        // alert($scope.goodsGroup.tbgoodsDesc.customAttributeItems);
         goodsService.add($scope.goodsGroup).success(
             function (callback) {
                 if (callback.success){
                     alert('保存成功');
-                    $scope.goodsGroup={};
-                    editor.html('');    //清空富文本编辑器
+                    window.location.reload();
                 } else {
                     alert(callback.msg);
                 }
@@ -78,6 +84,8 @@ app.controller('goodsController',function ($scope, $controller,
                 function (callback) {
                     $scope.typeTemplate=callback;
                     $scope.typeTemplate.brandIds=JSON.parse($scope.typeTemplate.brandIds);//品牌列表
+                    // $scope.customAttributeItems=JSON.parse($scope.typeTemplate.customAttributeItems);   //扩展属性
+                    $scope.goodsGroup.tbGoodsDesc.customAttributeItems=JSON.parse($scope.typeTemplate.customAttributeItems);
                 }
             );
         }
