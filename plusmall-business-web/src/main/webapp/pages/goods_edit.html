@@ -178,10 +178,10 @@
 
                         <div ng-if="goodsGroup.tbGoods.isEnableSpec==1">
                             <div class="row data-type">
-                                <div ng-repeat="pojo in specList">
+                                <div ng-repeat="pojo in specList track by $index">
                                     <div class="col-md-2 title">{{pojo.text}}</div>
                                     <div class="col-md-10 data">
-                                        <span ng-repeat="option in pojo.options">
+                                        <span ng-repeat="option in pojo.options track by $index">
                                             <input  type="checkbox"
                                             ng-click="updateSpecAttribute($event,pojo.text,option.optionName);createItemList()"
                                             ng-checked="checkAttributeValue(pojo.text,option.optionName)">{{option.optionName}}
@@ -189,12 +189,13 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="row data-type">
                                 <table class="table table-bordered table-striped table-hover dataTable">
                                     <thead>
                                         <tr>
                                             <th class="sorting" ng-repeat="item in
-                                        entity.goodsDesc.specificationItems">{{item.attributeName}}</th>
+                                        goodsGroup.tbGoodsDesc.specificationItems track by $index">{{item.attributeName}}</th>
                                             <th class="sorting">价格</th>
                                             <th class="sorting">库存</th>
                                             <th class="sorting">是否启用</th>
@@ -202,8 +203,8 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr ng-repeat="pojo in entity.itemList">
-                                            <td ng-repeat="item in entity.goodsDesc.specificationItems">
+                                        <tr ng-repeat="pojo in goodsGroup.itemList track by $index">
+                                            <td ng-repeat="item in goodsGroup.tbGoodsDesc.specificationItems track by $index">
                                                 {{pojo.spec[item.attributeName]}}
                                             </td>
                                             <td>

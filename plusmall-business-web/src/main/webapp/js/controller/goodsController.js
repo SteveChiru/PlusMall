@@ -11,7 +11,6 @@ app.controller('goodsController',function ($scope, $controller,
         $scope.goodsGroup.tbGoodsDesc.customAttributeItems=angular.toJson($scope.goodsGroup.tbGoodsDesc.customAttributeItems);
         $scope.goodsGroup.tbGoodsDesc.itemImages=angular.toJson($scope.goodsGroup.tbGoodsDesc.itemImages);
         $scope.goodsGroup.tbGoodsDesc.specificationItems=angular.toJson($scope.goodsGroup.tbGoodsDesc.specificationItems);
-        // alert($scope.goodsGroup.tbgoodsDesc.customAttributeItems);
         goodsService.add($scope.goodsGroup).success(
             function (callback) {
                 if (callback.success){
@@ -140,5 +139,29 @@ app.controller('goodsController',function ($scope, $controller,
             $scope.goodsGroup.tbGoodsDesc.specificationItems.push(
                 {"attributeName":name,"attributeValue":[value]});
         }
+    }
+    
+    //创建SKU列表
+    $scope.createItemList=function () {
+        $scope.goodsGroup.itemList=[{spec:{},price:0,num:99999,status:'0',isDefault:'0'}];
+        var items = $scope.goodsGroup.tbGoodsDesc.specificationItems;
+        for (var i=0;i<items.length;i++){
+            $scope.goodsGroup.itemList =
+                addColumn($scope.goodsGroup.itemList,items[i].attributeName,items[i].attributeValue);
+        }
+    }
+
+    //添加列值
+    addColumn=function (list, columnName, columnValues) {
+        var newList=[];     //新的集合
+        for (var i=0;i<list.length;i++){
+            var oldRow = list[i];
+            for (var j=0;j<columnValues.length;j++){
+                var newRow = JSON.parse(angular.toJson(oldRow));
+                newRow.spec[columnName]=columnValues[j];
+                newList.push(newRow);
+            }
+        }
+        return newList;
     }
 })
