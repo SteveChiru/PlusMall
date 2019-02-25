@@ -107,6 +107,23 @@ public class GoodsServiceImpl implements GoodsService {
 		}
 	}
 
+	@Override
+	public Goods findOne(Long id) {
+		logger.info(logStr+"findOne方法");
+		Goods goods = new Goods();
+		//查找商品数据
+		TbGoods tbGoods = goodsMapper.selectByPrimaryKey(id);
+		//查找商品描述数据
+		TbGoodsDesc tbGoodsDesc = goodsDescMapper.selectByPrimaryKey(id);
+		//查找商品SKU数据
+		TbItemExample example = new TbItemExample();
+		TbItemExample.Criteria criteria = example.createCriteria();
+		criteria.andGoodsIdEqualTo(id);
+		List<TbItem> tbItems = itemMapper.selectByExample(example);
+
+		return null;
+	}
+
 	private void setItemValues(Goods goods,TbItem item){
 		item.setGoodsId(goods.getTbGoods().getId());	//商品SPU编号
 		item.setSellerId(goods.getTbGoods().getSellerId());	//商家编号

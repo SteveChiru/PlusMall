@@ -12,4 +12,5 @@ public interface GoodsService {
 	public void add(Goods goods) throws NullPointerException;
 	public PageResult search(int pageNum, int pageSize, TbGoods tbGoods);
 	public void delete(Long[] ids) throws NullPointerException;
+	public Goods findOne(Long id);
 }

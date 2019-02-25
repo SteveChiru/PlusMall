@@ -15,6 +15,12 @@ public class Goods implements Serializable {
 	private TbGoodsDesc tbGoodsDesc;		//商品扩展
 	private List<TbItem> itemList;	//商品SKU列表
 
+	public Goods(TbGoods tbGoods, TbGoodsDesc tbGoodsDesc, List<TbItem> itemList) {
+		this.tbGoods = tbGoods;
+		this.tbGoodsDesc = tbGoodsDesc;
+		this.itemList = itemList;
+	}
+
 	public TbGoods getTbGoods() {
 		return tbGoods;
 	}
