@@ -66,4 +66,10 @@ public class GoodsController {
 		}
 		return actionResult;
 	}
+
+	@RequestMapping("/findOne")
+	public Goods findOne(Long id){
+		logger.info(logStr+"findOne方法");
+		return goodsService.findOne(id);
+	}
 }

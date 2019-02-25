@@ -110,7 +110,6 @@ public class GoodsServiceImpl implements GoodsService {
 	@Override
 	public Goods findOne(Long id) {
 		logger.info(logStr+"findOne方法");
-		Goods goods = new Goods();
 		//查找商品数据
 		TbGoods tbGoods = goodsMapper.selectByPrimaryKey(id);
 		//查找商品描述数据
@@ -120,8 +119,7 @@ public class GoodsServiceImpl implements GoodsService {
 		TbItemExample.Criteria criteria = example.createCriteria();
 		criteria.andGoodsIdEqualTo(id);
 		List<TbItem> tbItems = itemMapper.selectByExample(example);
-
-		return null;
+		return new Goods(tbGoods,tbGoodsDesc,tbItems);
 	}
 
 	private void setItemValues(Goods goods,TbItem item){

@@ -14,4 +14,9 @@ app.service('goodsService',function ($http) {
     this.delete=function (ids) {
         return $http.get('../goods/delete.do?ids='+ids);
     }
+
+    //根据商品Id查找商品信息
+    this.findOne=function (id) {
+        return $http.get('../goods/findOne.do?id='+id);
+    }
 })

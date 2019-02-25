@@ -1,4 +1,4 @@
-app.controller('goodsController',function ($scope, $controller,
+app.controller('goodsController',function ($scope, $controller,$location,
                    goodsService,itemCatService,typeTemplateService,uploadService) {
     $controller('baseController',{$scope:$scope});
 
@@ -82,11 +82,16 @@ app.controller('goodsController',function ($scope, $controller,
     //模板ID选择后，更新品牌列表
     $scope.$watch('goodsGroup.tbGoods.typeTemplateId',function (newValue, oldValue) {
         if (getTypeTemplate){
+            //读取品牌列表和扩展属性
             typeTemplateService.findOne(newValue).success(
                 function (callback) {
                     $scope.typeTemplate=callback;
                     $scope.typeTemplate.brandIds=JSON.parse($scope.typeTemplate.brandIds);//品牌列表
-                    $scope.goodsGroup.tbGoodsDesc.customAttributeItems=JSON.parse($scope.typeTemplate.customAttributeItems);
+                    //如果没有ID，则加载模板中的扩展数据
+                    if ($location.search()['id']==null){
+                        $scope.goodsGroup.tbGoodsDesc.customAttributeItems=
+                            JSON.parse($scope.typeTemplate.customAttributeItems);
+                    }
                 }
             );
             //查询规格列表
@@ -204,5 +209,26 @@ app.controller('goodsController',function ($scope, $controller,
                 }
             )
         }
+    }
+
+    //根据Id查找单个商品信息
+    $scope.findOne=function () {
+        var id = $location.search()['id'];  //获取参数id的值
+        if (id==null){
+            return;
+        }
+        goodsService.findOne(id).success(
+            function (callback) {
+                $scope.goodsGroup = callback;
+                //向富文本编辑器添加商品介绍
+                editor.html($scope.goodsGroup.tbGoodsDesc.introduction);
+                //显示图片列表
+                $scope.goodsGroup.tbGoodsDesc.itemImages=
+                    JSON.parse($scope.goodsGroup.tbGoodsDesc.itemImages);
+                //显示扩展属性
+                $scope.goodsGroup.tbGoodsDesc.customAttributeItems=
+                    JSON.parse($scope.goodsGroup.tbGoodsDesc.customAttributeItems);
+            }
+        )
     }
 })
