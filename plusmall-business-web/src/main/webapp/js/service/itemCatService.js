@@ -9,4 +9,9 @@ app.service('itemCatService',function ($http) {
     this.findOne=function (id) {
         return $http.get('../itemcat/findOne.do?id='+id);
     }
+
+    //查找商品分类表中的全部信息
+    this.findAll=function () {
+        return $http.get('../itemcat/findAll.do');
+    }
 })

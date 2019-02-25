@@ -8,6 +8,8 @@ import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * @Description:
  */
@@ -31,5 +33,11 @@ public class ItemCatController {
 	public TbItemCat findOne(Long id){
 		logger.info(logStr+"findOne方法");
 		return itemCatService.findOne(id);
+	}
+
+	@RequestMapping("/findAll")
+	public List<TbItemCat> findAll(){
+		logger.info(logStr+"findAll方法");
+		return itemCatService.findALl();
 	}
 }

@@ -19,11 +19,18 @@
 	<script src="../plugins/angularjs/pagination.js"></script>
 
     <!-- 引入JS业务代码 -->
-	<script type="text/javascript" src="../js/base_pagination.js"></script>
+	<script type="text/javascript" src="../js/base/base_pagination.js"></script>
+    <script type="text/javascript" src="../js/service/goodsService.js"></script>
+    <script type="text/javascript" src="../js/service/itemCatService.js"></script>
+    <script type="text/javascript" src="../js/service/typeTemplateService.js"></script>
+    <script type="text/javascript" src="../js/service/uploadService.js"></script>
+    <script type="text/javascript" src="../js/controller/baseController.js"></script>
+    <script type="text/javascript" src="../js/controller/goodsController.js"></script>
 
 </head>
 
-<body class="hold-transition skin-red sidebar-mini">
+<body class="hold-transition skin-red sidebar-mini" ng-app="plusmall"
+      ng-controller="goodsController" ng-init="findItemCatList()">
                 
     <div class="box-header with-border">
         <h3 class="box-title">商品管理</h3>
@@ -46,14 +53,14 @@
             </div>
             <div class="box-tools pull-right">
                 <div class="has-feedback">
-                  状态：<select ng-model="searchEntity.auditStatus">
+                  状态：<select ng-model="searchTbGoods.auditStatus">
                             <option value="">全部</option>
                             <option value="0">未申请</option>
                             <option value="1">申请中</option>
                             <option value="2">审核通过</option>
                             <option value="3">已驳回</option>
                         </select>
-                              商品名称：<input ng-model="searchEntity.goodsName">
+                              商品名称：<input ng-model="searchTbGoods.goodsName">
                     <button class="btn btn-default" ng-click="reloadList()">查询</button>
                 </div>
             </div>
@@ -74,19 +81,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="entity in list">
+                        <tr ng-repeat="tbGoods in result">
                             <td><input  type="checkbox"></td>
-                            <td>{{entity.id}}</td>
-                            <td>{{entity.goodsName}}</td>
-                            <td>{{entity.price}}</td>
-                            <td>{{itemCatList[entity.category1Id]}}</td>
-                            <td>{{itemCatList[entity.category2Id]}}</td>
-                            <td>{{itemCatList[entity.category3Id]}}</td>
+                            <td>{{tbGoods.id}}</td>
+                            <td>{{tbGoods.goodsName}}</td>
+                            <td>{{tbGoods.price}}</td>
+                            <td>{{itemCatList[tbGoods.category1Id]}}</td>
+                            <td>{{itemCatList[tbGoods.category2Id]}}</td>
+                            <td>{{itemCatList[tbGoods.category3Id]}}</td>
                             <td>
-                            {{status[entity.auditStatus]}}
+                            {{status[tbGoods.auditStatus]}}
                             </td>
                             <td class="text-center">
-                              <a href="goods_edit.html#?id={{entity.id}}" class="btn bg-olive btn-xs">修改</a>
+                              <a href="goods_edit.html#?id={{tbGoods.id}}" class="btn bg-olive btn-xs">修改</a>
                             </td>
                         </tr>
                     </tbody>

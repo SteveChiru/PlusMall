@@ -3,12 +3,12 @@ package com.plusmall.business.impl;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.plusmall.business.GoodsService;
+import com.plusmall.commons.PageResult;
 import com.plusmall.mapper.*;
-import com.plusmall.model.TbBrand;
-import com.plusmall.model.TbItem;
-import com.plusmall.model.TbItemCat;
-import com.plusmall.model.TbSeller;
+import com.plusmall.model.*;
 import com.plusmall.pojogroup.Goods;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,6 +69,25 @@ public class GoodsServiceImpl implements GoodsService {
 			itemMapper.insert(item);
 		}
 
+	}
+
+	@Override
+	public PageResult search(int pageNum, int pageSize, TbGoods tbGoods) {
+		logger.info(logStr+"search方法");
+		PageHelper.startPage(pageNum,pageSize);
+		TbGoodsExample example = new TbGoodsExample();
+		TbGoodsExample.Criteria criteria = example.createCriteria();
+		if (tbGoods.getSellerId()!=null && tbGoods.getSellerId().length() > 0){
+			criteria.andSellerIdEqualTo(tbGoods.getSellerId());
+		}
+		if (tbGoods.getAuditStatus() != null && tbGoods.getAuditStatus().length() > 0){
+			criteria.andAuditStatusEqualTo(tbGoods.getAuditStatus());
+		}
+		if (tbGoods.getGoodsName() != null && tbGoods.getGoodsName().length() > 0){
+			criteria.andGoodsNameLike("%"+tbGoods.getGoodsName()+"%");
+		}
+		Page<TbGoods> page = (Page<TbGoods>) goodsMapper.selectByExample(example);
+		return new PageResult(page.getTotal(),page.getPages(),page.getPageSize(),page.getResult());
 	}
 
 	private void setItemValues(Goods goods,TbItem item){

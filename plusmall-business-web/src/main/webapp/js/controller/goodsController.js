@@ -4,6 +4,8 @@ app.controller('goodsController',function ($scope, $controller,
 
     $scope.goodsGroup={tbGoods:{},tbGoodsDesc:{customAttributeItems:[],itemImages:[],specificationItems:[]}};//定义页面实体结构
 
+    $scope.status=['未审核','已审核','审核未通过','关闭'];
+
     //保存
     $scope.save=function () {
         $scope.goodsGroup.tbGoodsDesc.introduction=editor.html();
@@ -11,6 +13,7 @@ app.controller('goodsController',function ($scope, $controller,
         $scope.goodsGroup.tbGoodsDesc.customAttributeItems=angular.toJson($scope.goodsGroup.tbGoodsDesc.customAttributeItems);
         $scope.goodsGroup.tbGoodsDesc.itemImages=angular.toJson($scope.goodsGroup.tbGoodsDesc.itemImages);
         $scope.goodsGroup.tbGoodsDesc.specificationItems=angular.toJson($scope.goodsGroup.tbGoodsDesc.specificationItems);
+
         goodsService.add($scope.goodsGroup).success(
             function (callback) {
                 if (callback.success){
@@ -163,5 +166,28 @@ app.controller('goodsController',function ($scope, $controller,
             }
         }
         return newList;
+    }
+    
+    //查找
+    $scope.searchTbGoods={};
+    $scope.search=function (pageNum,pageSize) {
+        goodsService.search(pageNum,pageSize,$scope.searchTbGoods).success(
+            function (callback) {
+                $scope.result = callback.result;
+                $scope.paginationConf.totalItems = callback.total;
+            }
+        )
+    }
+
+    $scope.itemCatList=[];  //商品分类类表库
+    //加载商品分类列表
+    $scope.findItemCatList=function () {
+        itemCatService.findAll().success(
+            function (callback) {
+                for (var i=0;i<callback.length;i++){
+                    $scope.itemCatList[callback[i].id]=callback[i].name;
+                }
+            }
+        )
     }
 })

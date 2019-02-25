@@ -37,4 +37,10 @@ public class ItemCatServiceImpl implements ItemCatService {
 		logger.info(logStr+"findOne方法");
 		return itemCatMapper.selectByPrimaryKey(id);
 	}
+
+	@Override
+	public List<TbItemCat> findALl() {
+		logger.info(logStr+"findAll方法");
+		return itemCatMapper.selectByExample(null);
+	}
 }

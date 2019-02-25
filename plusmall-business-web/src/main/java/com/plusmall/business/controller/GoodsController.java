@@ -3,12 +3,17 @@ package com.plusmall.business.controller;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.plusmall.business.GoodsService;
 import com.plusmall.commons.ActionResult;
+import com.plusmall.commons.PageResult;
+import com.plusmall.model.TbGoods;
+import com.plusmall.model.TbItemCat;
 import com.plusmall.pojogroup.Goods;
 import org.apache.log4j.Logger;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * @Description:
@@ -19,6 +24,7 @@ public class GoodsController {
 	private static Logger logger = Logger.getLogger(GoodsController.class);
 	private static String logStr = "进入GoodsController-";
 	private static ActionResult actionResult;
+	private static PageResult pageResult;
 
 	@Reference
 	private GoodsService goodsService;
@@ -37,4 +43,15 @@ public class GoodsController {
 		}
 		return actionResult;
 	}
+
+	@RequestMapping("/search")
+	public PageResult search(int pageNum, int pageSize, @RequestBody TbGoods tbGoods){
+		logger.info(logStr+"search方法");
+		//获取商家ID
+		String sellerId = SecurityContextHolder.getContext().getAuthentication().getName();
+		//添加查询条件
+		tbGoods.setSellerId(sellerId);
+		return goodsService.search(pageNum,pageSize,tbGoods);
+	}
+
 }
