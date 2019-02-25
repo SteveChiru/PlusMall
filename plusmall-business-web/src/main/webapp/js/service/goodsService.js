@@ -9,4 +9,9 @@ app.service('goodsService',function ($http) {
     this.search=function (pageNum,pageSize,searchEntity) {
         return $http.post('../goods/search.do?pageNum='+pageNum+'&pageSize='+pageSize,searchEntity);
     }
+
+    //删除
+    this.delete=function (ids) {
+        return $http.get('../goods/delete.do?ids='+ids);
+    }
 })

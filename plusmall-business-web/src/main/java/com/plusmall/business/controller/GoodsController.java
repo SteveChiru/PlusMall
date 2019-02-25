@@ -54,4 +54,16 @@ public class GoodsController {
 		return goodsService.search(pageNum,pageSize,tbGoods);
 	}
 
+	@RequestMapping("/delete")
+	public ActionResult delete(Long[] ids){
+		logger.info(logStr+"delete方法");
+		try {
+			goodsService.delete(ids);
+			actionResult = new ActionResult(true,"删除多个商品成功");
+		}catch (NullPointerException e){
+			e.printStackTrace();
+			actionResult = new ActionResult(false,"删除多个商品失败");
+		}
+		return actionResult;
+	}
 }

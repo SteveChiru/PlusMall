@@ -190,4 +190,19 @@ app.controller('goodsController',function ($scope, $controller,
             }
         )
     }
+
+    //删除商品
+    $scope.delete=function () {
+        if (confirm("确定要删除所选商品的数据？")){
+            goodsService.delete($scope.idsSelected).success(
+                function (callback) {
+                    if (callback.success){
+                        $scope.reloadList();
+                    } else {
+                        alert(callback.msg);
+                    }
+                }
+            )
+        }
+    }
 })

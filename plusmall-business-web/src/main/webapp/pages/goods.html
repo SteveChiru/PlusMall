@@ -44,7 +44,7 @@
                 <div class="form-group form-inline">
                     <div class="btn-group">
                         <button type="button" class="btn btn-default" title="新建" >新建</button>
-                        <button type="button" class="btn btn-default" title="删除" >删除</button>
+                        <button type="button" class="btn btn-default" title="删除" ng-click="delete()">删除</button>
                         <button type="button" class="btn btn-default" title="提交审核" >提交审核</button>
                         <button type="button" class="btn btn-default" title="屏蔽" onclick='confirm("你确认要屏蔽吗？")'>屏蔽</button>
                         <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();">刷新</button>
@@ -82,7 +82,7 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="tbGoods in result">
-                            <td><input  type="checkbox"></td>
+                            <td><input  type="checkbox" ng-click="updateSelection($event,tbGoods.id)"></td>
                             <td>{{tbGoods.id}}</td>
                             <td>{{tbGoods.goodsName}}</td>
                             <td>{{tbGoods.price}}</td>

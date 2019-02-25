@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.plusmall.business.GoodsService;
+import com.plusmall.commons.ActionResult;
 import com.plusmall.commons.PageResult;
 import com.plusmall.mapper.*;
 import com.plusmall.model.*;
@@ -88,6 +89,22 @@ public class GoodsServiceImpl implements GoodsService {
 		}
 		Page<TbGoods> page = (Page<TbGoods>) goodsMapper.selectByExample(example);
 		return new PageResult(page.getTotal(),page.getPages(),page.getPageSize(),page.getResult());
+	}
+
+	@Override
+	public void delete(Long[] ids) throws NullPointerException {
+		logger.info(logStr+"deleteTbGoods方法");
+		for (Long id: ids){
+			//删除商品表中的商品信息
+			goodsMapper.deleteByPrimaryKey(id);
+			//删除商品描述表中的商品信息
+			goodsDescMapper.deleteByPrimaryKey(id);
+			//删除库存表内的商品
+			TbItemExample example = new TbItemExample();
+			TbItemExample.Criteria criteria = example.createCriteria();
+			criteria.andGoodsIdEqualTo(id);
+			itemMapper.deleteByExample(example);
+		}
 	}
 
 	private void setItemValues(Goods goods,TbItem item){
