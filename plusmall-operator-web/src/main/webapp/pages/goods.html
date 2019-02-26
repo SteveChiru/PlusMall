@@ -46,8 +46,8 @@ ng-controller="goodsAuditController" ng-init="findItemCatList()">
             </div>
             <div class="box-tools pull-right">
                 <div class="has-feedback">
-                    商品名称：<input >
-                    <button class="btn btn-default" >查询</button>
+                    商品名称：<input ng-model="searchTbGoods.goodsName">
+                    <button class="btn btn-default" ng-click="reloadList()">查询</button>
                 </div>
             </div>
             <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
