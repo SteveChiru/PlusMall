@@ -2,17 +2,16 @@ package com.plusmall.business.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.plusmall.business.GoodsService;
-import com.plusmall.commons.ActionResult;
 import com.plusmall.commons.PageResult;
 import com.plusmall.mapper.*;
 import com.plusmall.model.*;
 import com.plusmall.pojogroup.Goods;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -22,6 +21,7 @@ import java.util.Map;
  * @Description:
  */
 @Service
+@Transactional
 public class GoodsServiceImpl implements GoodsService {
 	private static Logger logger = Logger.getLogger(GoodsServiceImpl.class);
 	private static String logStr = "进入GoodsServiceImpl-";
