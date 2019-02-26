@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * @Description:
  */
@@ -73,5 +75,11 @@ public class ItemCatController {
 			actionResult = new ActionResult(false,"更新商品类型失败");
 		}
 		return actionResult;
+	}
+
+	@RequestMapping("/findAll")
+	public List<TbItemCat> findAll(){
+		logger.info(logStr+"findAll方法");
+		return itemCatService.findAll();
 	}
 }

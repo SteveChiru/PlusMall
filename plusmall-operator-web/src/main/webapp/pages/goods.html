@@ -20,13 +20,14 @@
     <!--JS开发代码-->
     <script type="text/javascript" src="../js/base/base_pagination.js"></script>
     <script type="text/javascript" src="../js/service/goodsAuditService.js"></script>
+    <script type="text/javascript" src="../js/service/itemCatService.js"></script>
     <script type="text/javascript" src="../js/controller/baseController.js"></script>
     <script type="text/javascript" src="../js/controller/goodsAuditController.js"></script>
 
 </head>
 
 <body class="hold-transition skin-red sidebar-mini" ng-app="plusmall"
-ng-controller="goodsAuditController">
+ng-controller="goodsAuditController" ng-init="findItemCatList()">
     <div class="box-header with-border">
         <h3 class="box-title">商品审核</h3>
     </div>

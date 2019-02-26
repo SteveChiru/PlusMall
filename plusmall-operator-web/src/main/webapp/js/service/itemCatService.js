@@ -24,4 +24,9 @@ app.service('itemCatService',function ($http) {
     this.update=function (itemCat) {
         return $http.post('../itemcat/update.do',itemCat);
     }
+
+    //查找所有商品分类数据
+    this.findAll=function () {
+        return $http.get('../itemcat/findAll.do');
+    }
 });
