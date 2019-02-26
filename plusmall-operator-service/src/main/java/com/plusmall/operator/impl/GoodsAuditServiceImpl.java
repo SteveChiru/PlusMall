@@ -37,4 +37,14 @@ public class GoodsAuditServiceImpl implements GoodsAuditService {
 		Page<TbGoods> page = (Page<TbGoods>) tbGoodsMapper.selectByExample(example);
 		return new PageResult(page.getTotal(),page.getPages(),page.getPageSize(),page.getResult());
 	}
+
+	@Override
+	public void updateStatus(Long[] ids, String status) throws NullPointerException {
+		logger.info(logStr+"updateStatus方法");
+		for (Long id: ids){
+			TbGoods tbGoods = tbGoodsMapper.selectByPrimaryKey(id);
+			tbGoods.setAuditStatus(status);
+			tbGoodsMapper.updateByPrimaryKey(tbGoods);
+		}
+	}
 }

@@ -1,6 +1,7 @@
 package com.plusmall.operator.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.plusmall.commons.ActionResult;
 import com.plusmall.commons.PageResult;
 import com.plusmall.model.TbGoods;
 import com.plusmall.operator.GoodsAuditService;
@@ -18,6 +19,7 @@ public class GoodsAuditController {
 	private static Logger logger = Logger.getLogger(GoodsAuditController.class);
 	private static String logStr = "进入GoodsAuditController-";
 	private static PageResult pageResult;
+	private static ActionResult actionResult;
 
 	@Reference
 	private GoodsAuditService goodsAuditService;
@@ -26,5 +28,18 @@ public class GoodsAuditController {
 	public PageResult search(int pageNum, int pageSize, @RequestBody TbGoods tbGoods){
 		logger.info(logStr+"进入search方法");
 		return goodsAuditService.search(pageNum,pageSize,tbGoods);
+	}
+
+	@RequestMapping("/updateStatus")
+	public ActionResult updateStatus(Long[] ids,String status){
+		logger.info(logStr+"updateStatus");
+		try {
+			goodsAuditService.updateStatus(ids,status);
+			actionResult = new ActionResult(true,"成功更新商品状态");
+		}catch (NullPointerException e){
+			e.printStackTrace();
+			actionResult = new ActionResult(false,"失败更新商品状态");
+		}
+		return actionResult;
 	}
 }

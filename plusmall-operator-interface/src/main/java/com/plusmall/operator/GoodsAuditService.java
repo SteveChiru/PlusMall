@@ -8,5 +8,5 @@ import com.plusmall.model.TbGoods;
  */
 public interface GoodsAuditService {
 	public PageResult search(int pageNum, int pageSize, TbGoods tbGoods);
-
+	public void updateStatus(Long[] ids,String status) throws NullPointerException;
 }

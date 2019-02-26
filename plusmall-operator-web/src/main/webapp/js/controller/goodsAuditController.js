@@ -25,4 +25,18 @@ app.controller('goodsAuditController',function ($scope,$controller,goodsAuditSer
             }
         )
     }
+
+    //更新商品状态
+    $scope.updateStatus=function (status) {
+        goodsAuditService.updateStatus($scope.idsSelected,status).success(
+            function (callback) {
+                if (callback.success){
+                    $scope.reloadList();
+                    $scope.idsSelected=[];
+                } else {
+                    alert(callback.msg);
+                }
+            }
+        )
+    }
 })
