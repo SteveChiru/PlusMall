@@ -34,6 +34,7 @@ public class GoodsAuditServiceImpl implements GoodsAuditService {
 		if (tbGoods.getGoodsName()!=null && tbGoods.getGoodsName().length() > 0){
 			criteria.andGoodsNameLike("%"+tbGoods.getGoodsName()+"%");
 		}
+		criteria.andIsDeleteIsNull();
 		Page<TbGoods> page = (Page<TbGoods>) tbGoodsMapper.selectByExample(example);
 		return new PageResult(page.getTotal(),page.getPages(),page.getPageSize(),page.getResult());
 	}
@@ -44,6 +45,16 @@ public class GoodsAuditServiceImpl implements GoodsAuditService {
 		for (Long id: ids){
 			TbGoods tbGoods = tbGoodsMapper.selectByPrimaryKey(id);
 			tbGoods.setAuditStatus(status);
+			tbGoodsMapper.updateByPrimaryKey(tbGoods);
+		}
+	}
+
+	@Override
+	public void delete(Long[] ids) throws NullPointerException {
+		logger.info(logStr+"delete方法");
+		for (Long id: ids){
+			TbGoods tbGoods = tbGoodsMapper.selectByPrimaryKey(id);	//逻辑删除
+			tbGoods.setIsDelete("1");
 			tbGoodsMapper.updateByPrimaryKey(tbGoods);
 		}
 	}

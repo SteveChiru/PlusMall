@@ -39,4 +39,17 @@ app.controller('goodsAuditController',function ($scope,$controller,goodsAuditSer
             }
         )
     }
+
+    //删除商品信息
+    $scope.delete=function () {
+        goodsAuditService.delete($scope.idsSelected).success(
+            function (callback) {
+                if (callback.success){
+                    $scope.reloadList();
+                } else {
+                    alert(callback.msg);
+                }
+            }
+        )
+    }
 })

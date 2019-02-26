@@ -9,4 +9,9 @@ app.service('goodsAuditService',function ($http) {
     this.updateStatus=function (ids, status) {
         return $http.get('../goodsAudit/updateStatus.do?ids='+ids+'&status='+status);
     }
+
+    //删除商品
+    this.delete=function (ids) {
+        return $http.get('../goodsAudit/delete.do?ids='+ids);
+    }
 })

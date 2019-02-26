@@ -42,4 +42,17 @@ public class GoodsAuditController {
 		}
 		return actionResult;
 	}
+
+	@RequestMapping("/delete")
+	public ActionResult delete(Long[] ids){
+		logger.info(logStr+"delete方法");
+		try {
+			goodsAuditService.delete(ids);
+			actionResult = new ActionResult(true,"成功删除商品信息");
+		}catch (NullPointerException e){
+			e.printStackTrace();
+			actionResult = new ActionResult(false,"失败删除商品信息");
+		}
+		return actionResult;
+	}
 }
