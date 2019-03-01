@@ -40,13 +40,16 @@ public class SellerServiceImpl implements SellerService {
 	}
 
 	@Override
-	public TbSeller findOne(String id) {
+	public TbSeller findOne(String sellerId) {
 		logger.info(logStr+"findOne方法");
-		return sellerMapper.selectByPrimaryKey(id);
+		return sellerMapper.selectByPrimaryKey(sellerId);
 	}
 
 	@Override
 	public void update(TbSeller seller) throws NullPointerException {
-
+		logger.info(logStr+"update方法");
+		seller.setStatus("0");
+		seller.setCreateTime(new Date());
+		sellerMapper.updateByPrimaryKey(seller);
 	}
 }

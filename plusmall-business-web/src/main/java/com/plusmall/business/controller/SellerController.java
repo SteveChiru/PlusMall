@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.UnsupportedEncodingException;
+
 /**
  * @Description:
  */
@@ -37,5 +39,30 @@ public class SellerController {
 			actionResult = new ActionResult(false,"新增商家失败");
 		}
 		return actionResult;
+	}
+
+	@RequestMapping("update")
+	public ActionResult updateSeller(@RequestBody TbSeller seller){
+		logger.info(logStr+"update方法");
+		try {
+			sellerService.update(seller);
+			actionResult = new ActionResult(true,"更新用户信息成功");
+		}catch (NullPointerException e){
+			e.printStackTrace();
+			actionResult = new ActionResult(false,"更新用户信息失败");
+		}
+		return actionResult;
+	}
+
+	@RequestMapping("findOne")
+	public TbSeller findOne(String sellerId){
+		logger.info(logStr+"findOne方法");
+		try {
+			sellerId = new String(sellerId.getBytes("ISO-8859-1"),"utf-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		System.out.println(sellerId);
+		return sellerService.findOne(sellerId);
 	}
 }
