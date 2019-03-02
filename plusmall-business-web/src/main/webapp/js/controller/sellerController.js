@@ -16,9 +16,11 @@ app.controller('sellerController',function ($scope, $controller, sellerService,l
 
     //根据sellerId查找单个用户信息
     $scope.findOne=function(){
+        alert("进入findOne的js代码");
         loginService.loginName().success(
             function (callback) {
                 $scope.loginName=callback.loginName;
+                alert($scope.loginName);
                 sellerService.findOne($scope.loginName).success(
                     function (callback) {
                         $scope.seller=callback;
@@ -39,5 +41,26 @@ app.controller('sellerController',function ($scope, $controller, sellerService,l
                 }
             }
         )
+    }
+
+    //输入原始密码完成后，检测密码是否正确
+    $scope.checkOrgPwd=function () {
+        alert("检测原始密码是否正确");
+    }
+
+    //输入新密码后，保证新密码和原始密码不一样
+    $scope.checkNewPwd=function () {
+        if ($scope.newPwd==$scope.orgPwd){
+            alert("新密码不能和原始密码一样，请重新设置");
+            $scope.newPwd="";
+        }
+    }
+
+    //输入确认新密码后，要保证确认新密码和新密码是一致的
+    $scope.checkConfirmNewPwd=function () {
+        if ($scope.confirmNewPwd!=$scope.newPwd){
+            alert("确认密码与新设置密码不一致，请重新输入");
+            $scope.confirmNewPwd="";
+        }
     }
 });

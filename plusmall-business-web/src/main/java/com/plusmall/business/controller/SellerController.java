@@ -62,7 +62,6 @@ public class SellerController {
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		System.out.println(sellerId);
 		return sellerService.findOne(sellerId);
 	}
 }
