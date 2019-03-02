@@ -5,6 +5,8 @@ import com.plusmall.business.SellerService;
 import com.plusmall.commons.ActionResult;
 import com.plusmall.model.TbSeller;
 import org.apache.log4j.Logger;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,7 +43,7 @@ public class SellerController {
 		return actionResult;
 	}
 
-	@RequestMapping("update")
+	@RequestMapping("/update")
 	public ActionResult updateSeller(@RequestBody TbSeller seller){
 		logger.info(logStr+"update方法");
 		try {
@@ -54,7 +56,7 @@ public class SellerController {
 		return actionResult;
 	}
 
-	@RequestMapping("findOne")
+	@RequestMapping("/findOne")
 	public TbSeller findOne(String sellerId){
 		logger.info(logStr+"findOne方法");
 		try {
@@ -63,5 +65,40 @@ public class SellerController {
 			e.printStackTrace();
 		}
 		return sellerService.findOne(sellerId);
+	}
+
+	@RequestMapping("/checkOrgPwd")
+	public ActionResult checkOrgPwd(String orgPwd){
+		logger.info(logStr+"checkOrgPwd方法");
+		String name = SecurityContextHolder.getContext().getAuthentication().getName();
+		String pwdHashed = sellerService.findOne(name).getPassword();
+		if (BCrypt.checkpw(orgPwd,pwdHashed)){
+			actionResult = new ActionResult(true,"密码验证通过");
+		}else {
+			actionResult = new ActionResult(false,"密码验证未通过");
+		}
+		return actionResult;
+	}
+
+	@RequestMapping("/updateNewPwd")
+	public ActionResult updateNewPwd(String newPwd){
+		logger.info(logStr+"updateNewPwd方法");
+		//根据当前登录商家名字，找到该商家的全部信息
+		String name = SecurityContextHolder.getContext().getAuthentication().getName();
+		TbSeller seller = sellerService.findOne(name);
+		//对新设置的密码进行加密处理
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String password = passwordEncoder.encode(newPwd);
+		//设置新密码
+		seller.setPassword(password);
+		//更新用户信息
+		try {
+			sellerService.update(seller);
+			actionResult = new ActionResult(true,"更新用户密码成功");
+		}catch (Exception e){
+			e.printStackTrace();
+			actionResult = new ActionResult(false,"更新用户密码出错");
+		}
+		return actionResult;
 	}
 }

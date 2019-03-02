@@ -13,4 +13,14 @@ app.service('sellerService',function ($http) {
     this.update=function (sellerEntity) {
         return $http.post('../seller/update.do',sellerEntity);
     }
+
+    //验证密码是否正确
+    this.checkOrgPwd=function (orgPwd) {
+        return $http.get('../seller/checkOrgPwd.do?orgPwd='+orgPwd);
+    }
+
+    //更新新密码
+    this.updateConfirmNewPwd=function (confirmNewPwd) {
+        return $http.get('../seller/updateNewPwd.do?newPwd='+confirmNewPwd);
+    }
 });
