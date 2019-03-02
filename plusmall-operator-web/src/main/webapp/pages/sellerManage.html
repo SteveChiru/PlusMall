@@ -18,11 +18,15 @@
     <script src="../plugins/angularjs/pagination.js"></script>
 
     <!-- 引入JS业务代码 -->
-
+    <script type="text/javascript" src="/js/base/base_pagination.js"></script>
+    <script type="text/javascript" src="/js/service/sellerService.js"></script>
+    <script type="text/javascript" src="/js/controller/baseController.js"></script>
+    <script type="text/javascript" src="/js/controller/sellerController.js"></script>
     
 </head>
 
-<body class="hold-transition skin-red sidebar-mini"  >
+<body class="hold-transition skin-red sidebar-mini" ng-app="plusmall"
+        ng-controller="operatorSellerController">
     <div class="box box-primary">
         <div class="box-header with-border">
             <h3 class="box-title">商家管理</h3>
@@ -55,21 +59,20 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>梦琪琪商贸有限公司</td>
-                            <td>梦琪琪</td>
-                            <td>李梦琪</td>
-                            <td>13402312232</td>
-                            <td>
-                              <span>未审核</span>
-                            </td>
+                        <tr ng-repeat="seller in result">
+                            <td>{{seller.sellerId}}</td>
+                            <td>{{seller.name}}</td>
+                            <td>{{seller.nickName}}</td>
+                            <td>{{seller.linkmanName}}</td>
+                            <td>{{seller.telephone}}</td>
+                            <td>{{statusList[seller.status]}}</td>
                             <td class="text-center">
-                              <button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#sellerModal" >详情</button>
+                                <button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#sellerModal" ng-click="findOne(seller.sellerId)">详情</button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
+                <tm-pagination conf="paginationConf"></tm-pagination>
             </div>
         </div>
     </div>

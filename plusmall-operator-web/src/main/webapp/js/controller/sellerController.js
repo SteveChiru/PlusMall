@@ -1,6 +1,8 @@
 app.controller('operatorSellerController',function ($scope, $controller, operatorSellerService) {
     $controller('baseController',{$scope:$scope});  //继承
 
+    $scope.statusList=['未审核','已审核','审核未通过','关闭'];
+
     //根据条件查找商家
     $scope.searchSeller={};
     $scope.search=function (pageNum, pageSize) {
