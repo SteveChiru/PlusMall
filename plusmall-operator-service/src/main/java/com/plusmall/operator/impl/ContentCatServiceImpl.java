@@ -56,4 +56,10 @@ public class ContentCatServiceImpl implements ContentCatService {
 		logger.info(logStr+"update方法");
 		contentCategoryMapper.updateByPrimaryKey(contentCategory);
 	}
+
+	@Override
+	public List<TbContentCategory> findAll() {
+		logger.info(logStr+"findAll方法");
+		return contentCategoryMapper.selectByExample(null);
+	}
 }

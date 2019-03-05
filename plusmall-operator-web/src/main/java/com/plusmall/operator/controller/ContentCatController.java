@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * @Description:
  */
@@ -80,5 +82,11 @@ public class ContentCatController {
 			actionResult = new ActionResult(false,"更新广告分类失败");
 		}
 		return actionResult;
+	}
+
+	@RequestMapping("/findAll")
+	public List<TbContentCategory> findAll(){
+		logger.info(logStr+"findAll方法");
+		return contentCatService.findAll();
 	}
 }

@@ -24,4 +24,9 @@ app.service('contentCatService',function ($http) {
     this.update=function (contentCat) {
         return $http.post('../contentCat/update.do?',contentCat);
     }
+
+    //查找全部广告分类
+    this.findAll=function () {
+        return $http.get('../contentCat/findAll.do');
+    }
 })

@@ -1,4 +1,5 @@
-app.controller('contentController',function ($scope, $controller, contentService) {
+app.controller('contentController',function ($scope, $controller,
+                 contentService,contentCatService) {
     $controller('baseController',{$scope:$scope});  //继承
 
     //查找
@@ -44,6 +45,18 @@ app.controller('contentController',function ($scope, $controller, contentService
         contentService.findOne(id).success(
             function (callback) {
                 $scope.content = callback;
+            }
+        )
+    }
+
+    //查找全部广告分类
+    $scope.contentCatList=[];  //广告分类类表库
+    $scope.findContentCatList=function () {
+        contentCatService.findAll().success(
+            function (callback) {
+                for (var i=0;i<callback.length;i++){
+                    $scope.contentCatList[callback[i].id]=callback[i].name;
+                }
             }
         )
     }

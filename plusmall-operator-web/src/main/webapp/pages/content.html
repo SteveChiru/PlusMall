@@ -19,11 +19,13 @@
     <!-- 引入JS业务代码 -->
     <script type="text/javascript" src="../js/base/base_pagination.js"></script>
     <script type="text/javascript" src="../js/service/contentService.js"></script>
+    <script type="text/javascript" src="../js/service/contentCatService.js"></script>
     <script type="text/javascript" src="../js/controller/baseController.js"></script>
     <script type="text/javascript" src="../js/controller/contentController.js"></script>
     
 </head>
-<body class="hold-transition skin-red sidebar-mini" ng-app="plusmall" ng-controller="contentController">
+<body class="hold-transition skin-red sidebar-mini" ng-app="plusmall"
+      ng-controller="contentController" ng-init="findContentCatList()">
     <div class="box-header with-border">
         <h3 class="box-title">管理</h3>
     </div>
@@ -50,8 +52,7 @@
                         <th class="" style="padding-right:0px">
                             <input id="selall" type="checkbox" class="icheckbox_square-blue">
                         </th>
-                        <th class="sorting"></th>
-                        <th class="sorting">内容类目ID</th>
+                        <th class="sorting">广告类型</th>
                         <th class="sorting">内容标题</th>
                         <th class="sorting">链接</th>
                         <th class="sorting">图片</th>
@@ -63,8 +64,8 @@
                 <tbody>
                     <tr ng-repeat="content in result">
                         <td><input  type="checkbox" ng-click="updateSelection($event,content.id)"></td>
-                            <td>{{content.id}}</td>
-                        <td>{{content.categoryId}}</td>
+                       <!-- <td>{{content.categoryId}}</td>-->
+                        <td>{{contentCatList[content.categoryId]}}</td>
                         <td>{{content.title}}</td>
                         <td>{{content.url}}</td>
                         <td>
