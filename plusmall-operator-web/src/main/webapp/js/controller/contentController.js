@@ -1,5 +1,5 @@
 app.controller('contentController',function ($scope, $controller,
-                 contentService,contentCatService) {
+                 contentService,contentCatService,uploadService) {
     $controller('baseController',{$scope:$scope});  //继承
 
     //查找
@@ -14,7 +14,7 @@ app.controller('contentController',function ($scope, $controller,
 
     //删除
     $scope.delete=function () {
-        contentCat.delete($scope.idsSelected).success(
+        contentService.delete($scope.idsSelected).success(
             function (callback) {
                 if (callback.success){
                     $scope.reloadList();
@@ -54,10 +54,28 @@ app.controller('contentController',function ($scope, $controller,
     $scope.findContentCatList=function () {
         contentCatService.findAll().success(
             function (callback) {
+                $scope.contentCatMap=callback;
                 for (var i=0;i<callback.length;i++){
                     $scope.contentCatList[callback[i].id]=callback[i].name;
                 }
             }
         )
+    }
+    
+    //上传文件
+    $scope.uploadFile=function () {
+        alert("进入上传文件JS代码");
+        uploadService.uploadFile().success(
+            function (callback) {
+                if (callback.success){  //如果上传成功，取出url
+                    $scope.content.pic=callback.msg;   //设置文件地址
+                    alert("上传成功，图片存储路径为："+callback.msg);
+                } else {
+                    alert(callback.msg);
+                }
+            }
+        ).error(function () {
+            alert("上传发生错误");
+        });
     }
 })

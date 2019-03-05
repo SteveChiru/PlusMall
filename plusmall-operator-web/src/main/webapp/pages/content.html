@@ -20,6 +20,7 @@
     <script type="text/javascript" src="../js/base/base_pagination.js"></script>
     <script type="text/javascript" src="../js/service/contentService.js"></script>
     <script type="text/javascript" src="../js/service/contentCatService.js"></script>
+    <script type="text/javascript" src="../js/service/uploadService.js"></script>
     <script type="text/javascript" src="../js/controller/baseController.js"></script>
     <script type="text/javascript" src="../js/controller/contentController.js"></script>
     
@@ -96,7 +97,7 @@
                         <tr>
                             <td>内容类目</td>
                             <td>
-                                <select  class="form-control" ng-model="content.categoryId" ng-options="item.id as item.name  for item in contentCategoryList"></select>
+                                <select  class="form-control" ng-model="content.categoryId" ng-options="item.id as item.name  for item in contentCatMap"></select>
                             </td>
                         </tr>
                         <tr>
