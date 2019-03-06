@@ -17,6 +17,9 @@
         <module>plusmall-business-web</module>
         <module>plusmall-business-interface</module>
         <module>plusmall-business-service</module>
+        <module>plusmall-portal-interface</module>
+        <module>plusmall-portal-service</module>
+        <module>plusmall-portal-web</module>
     </modules>
 
     <packaging>pom</packaging>

@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.plusmall</groupId>
-    <artifactId>plusmall-business-web</artifactId>
+    <artifactId>plusmall-portal-service</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <packaging>war</packaging>
@@ -24,19 +24,6 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-        </dependency>
-        <!--引入spring-security-->
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-config</artifactId>
         </dependency>
         <!--引用dubbo-->
         <dependency>
@@ -58,30 +45,16 @@
             <groupId>javassist</groupId>
             <artifactId>javassist</artifactId>
         </dependency>
-        <!-- jackson -->
+        <!-- log4j -->
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-        </dependency>
-        <!--multipartResolver depend commons-fileupload-->
-        <dependency>
-            <groupId>commons-fileupload</groupId>
-            <artifactId>commons-fileupload</artifactId>
-        </dependency>
-        <!--fastDFS-->
-        <dependency>
-            <groupId>org.csource</groupId>
-            <artifactId>fastdfs-client-java</artifactId>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
         </dependency>
 
-        <!--business-service-->
+        <!--依赖运营商接口-->
         <dependency>
             <groupId>org.plusmall</groupId>
-            <artifactId>plusmall-business-interface</artifactId>
+            <artifactId>plusmall-portal-interface</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
@@ -94,7 +67,7 @@
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <configuration>
                     <path>/</path>
-                    <port>9190</port>
+                    <port>9291</port>
                 </configuration>
             </plugin>
         </plugins>
