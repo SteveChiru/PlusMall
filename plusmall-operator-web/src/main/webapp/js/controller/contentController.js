@@ -64,7 +64,6 @@ app.controller('contentController',function ($scope, $controller,
     
     //上传文件
     $scope.uploadFile=function () {
-        alert("进入上传文件JS代码");
         uploadService.uploadFile().success(
             function (callback) {
                 if (callback.success){  //如果上传成功，取出url
