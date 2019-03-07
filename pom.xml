@@ -50,6 +50,8 @@
         <commons-fileupload.version>1.3.3</commons-fileupload.version>
         <commons-io.version>2.4</commons-io.version>
         <fastJson.version>1.2.47</fastJson.version>
+        <jedis.version>2.9.0</jedis.version>
+        <springDataRedis.version>1.7.2.RELEASE</springDataRedis.version>
 
         <plusmall-pojo.version>1.0-SNAPSHOT</plusmall-pojo.version>
         <plusmall-dao.version>1.0-SNAPSHOT</plusmall-dao.version>
@@ -247,6 +249,17 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${fastJson.version}</version>
+            </dependency>
+            <!-- redis相关 -->
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${jedis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-redis</artifactId>
+                <version>${springDataRedis.version}</version>
             </dependency>
 
             <!-- plusmall-pojo -->
