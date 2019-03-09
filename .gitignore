@@ -40,4 +40,5 @@ plusmall-operator-web/src/main/resources/fdfs_client.conf
 plusmall-operator-web/src/main/resources/application.properties
 plusmall-business-web/src/main/resources/fdfs_client.conf
 plusmall-business-web/src/main/resources/application.properties
-plusmall-commons/src/main/resources/redis-config.properties
+plusmall-portal-service/src/main/resources/redis-config.properties
+plusmall-operator-service/src/main/resources/redis-config.properties

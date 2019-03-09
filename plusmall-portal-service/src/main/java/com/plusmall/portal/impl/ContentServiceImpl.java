@@ -7,6 +7,7 @@ import com.plusmall.model.TbContentExample;
 import com.plusmall.portal.ContentService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.List;
 
@@ -21,12 +22,26 @@ public class ContentServiceImpl implements ContentService {
 	@Autowired
 	private TbContentMapper contentMapper;
 
+	@Autowired
+	private RedisTemplate redisTemplate;
+
 	@Override
 	public List<TbContent> search(Long catId) {
 		logger.info(logStr+"search方法");
-		TbContentExample example = new TbContentExample();
-		TbContentExample.Criteria criteria = example.createCriteria();
-		criteria.andCategoryIdEqualTo(catId);
-		return contentMapper.selectByExample(example);
+		//Map<String,Map<string,List>>
+		List<TbContent> contentList = (List<TbContent>) redisTemplate.boundHashOps("content").get(catId);
+		if (contentList == null){
+			logger.info("从数据库读取数据放入缓存");
+			TbContentExample example = new TbContentExample();
+			TbContentExample.Criteria criteria = example.createCriteria();
+			criteria.andCategoryIdEqualTo(catId);
+			criteria.andStatusEqualTo("1");	//开启状态
+			contentList = contentMapper.selectByExample(example);
+			redisTemplate.boundHashOps("content").put(catId,contentList);
+		}else {
+			logger.info("从缓存读取数据");
+		}
+
+		return contentList;
 	}
 }
