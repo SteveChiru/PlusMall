@@ -13,5 +13,11 @@
     <artifactId>plusmall-pojo</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-
+    <dependencies>
+        <!-- springDataSolr -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-solr</artifactId>
+        </dependency>
+    </dependencies>
 </project>
