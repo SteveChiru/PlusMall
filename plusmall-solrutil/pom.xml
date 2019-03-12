@@ -14,15 +14,20 @@
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>
-        <!-- springDataSolr -->
+        <!--引用spring-->
         <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-solr</artifactId>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
         </dependency>
         <!-- spring-test -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
+        </dependency>
+        <!-- springDataSolr -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-solr</artifactId>
         </dependency>
         <!-- junit -->
         <dependency>

@@ -8,7 +8,7 @@
   		         http://www.springframework.org/schema/data/solr/spring-solr-1.0.xsd">
 
     <!-- solr服务器地址 -->
-    <solr:solr-server id="solrServer" url="http://cloudserver:8190" />
+    <solr:solr-server id="solrServer" url="http://cloudserver:8190/collection1" />
     <!-- solr模板，使用solr模板可对索引库进行CRUD的操作 -->
     <bean id="solrTemplate" class="org.springframework.data.solr.core.SolrTemplate">
         <constructor-arg ref="solrServer" />
