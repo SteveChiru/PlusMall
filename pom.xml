@@ -21,6 +21,9 @@
         <module>plusmall-portal-service</module>
         <module>plusmall-portal-web</module>
         <module>plusmall-solrutil</module>
+        <module>plusmall-search-interface</module>
+        <module>plusmall-search-service</module>
+        <module>plusmall-search-web</module>
     </modules>
 
     <packaging>pom</packaging>
