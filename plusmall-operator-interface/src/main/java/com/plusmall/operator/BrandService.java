@@ -15,5 +15,6 @@ public interface BrandService {
 	public void update(TbBrand brand);
 	public void delete(Long[] ids);
 	public PageResult searchBrands(TbBrand brandinfo,int pageNum,int pageSize);
+	public List<TbBrand> findAll();
 	public List<Map> selectOptionList();
 }

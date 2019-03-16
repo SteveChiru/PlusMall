@@ -11,6 +11,7 @@ import com.plusmall.model.TbBrandExample.Criteria;
 import com.plusmall.operator.BrandService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.List;
 import java.util.Map;
@@ -18,13 +19,15 @@ import java.util.Map;
 /**
  * @Description:
  */
-@Service
+@Service(timeout = 600000)
 public class BrandServiceImpl implements BrandService {
-
 	private static Logger logger = Logger.getLogger(BrandServiceImpl.class);
+	private static String logStr = "进入BrandServiceImple-";
 
 	@Autowired
 	private TbBrandMapper brandMapper;
+	@Autowired
+	private RedisTemplate redisTemplate;
 
 	@Override
 	public void add(TbBrand brand) {
@@ -68,7 +71,21 @@ public class BrandServiceImpl implements BrandService {
 			}
 		}
 		Page<TbBrand> page = (Page<TbBrand>) brandMapper.selectByExample(example);
+		saveBrandToRedis();
 		return new PageResult(page.getTotal(),page.getPages(),page.getPageSize(),page.getResult());
+	}
+
+	@Override
+	public List<TbBrand> findAll() {
+		logger.info(logStr+"findAll方法");
+		return brandMapper.selectByExample(null);
+	}
+
+	private void saveBrandToRedis() {
+		List<TbBrand> allBrands = findAll();
+		for (TbBrand brand : allBrands){
+			redisTemplate.boundSetOps("allBrand").add(brand.getName());
+		}
 	}
 
 	@Override

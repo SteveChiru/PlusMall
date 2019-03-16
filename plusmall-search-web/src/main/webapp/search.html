@@ -176,7 +176,7 @@
             <!-- 查找条件选择 -->
             <div class="clearfix selector">
                 <!-- 商品分类 -->
-                <div class="type-wrap" ng-if="resultMap.categoryList!=null ">
+                <div class="type-wrap" ng-if="resultMap.categoryList!=null && searchMap.category==''">
                     <div class="fl key">商品分类</div>
                     <div class="fl value">
                         <span ng-repeat="category in resultMap.categoryList">
@@ -186,7 +186,7 @@
                     <div class="fl ext"></div>
                 </div>
                 <!-- 品牌 -->
-                <div class="type-wrap logo" ng-if="resultMap.brandList!=null && searchMap.brand=='' && keywordsIsBrand()==false">
+                <div class="type-wrap logo" ng-if="resultMap.brandList!=null && searchMap.brand==''">
                     <div class="fl key brand">品牌</div>
                     <div class="value logos">
                         <ul class="logo-list">
@@ -200,6 +200,7 @@
                         <a href="javascript:void(0);">更多</a>
                     </div>
                 </div>
+                <!-- 规格 -->
                 <div class="type-wrap" ng-repeat="spec in resultMap.specList" ng-if="searchMap.spec[spec.text]==null">
                     <div class="fl key">{{spec.text}}</div>
                     <div class="fl value">
