@@ -5,6 +5,10 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
 /**
  * @Description:
  */
@@ -24,6 +28,12 @@ public class RedisTest {
 	public void getValue(){
 		String str = (String) redisTemplate.boundValueOps("name").get();
 		System.out.println(str);
+	}
+
+	@Test
+	public void getMap(){
+		Map map = new HashMap();
+		System.out.println(redisTemplate.opsForHash().keys("itemCat"));
 	}
 
 }

@@ -10,19 +10,22 @@ import com.plusmall.model.TbItemCatExample;
 import com.plusmall.operator.ItemCatService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.List;
 
 /**
  * @Description:
  */
-@Service
+@Service(timeout = 600000)
 public class ItemCatServiceImpl implements ItemCatService {
 	private static Logger logger = Logger.getLogger(ItemCatServiceImpl.class);
 	private static String logStr = "进入ItemCatServiceImpl-";
 
 	@Autowired
 	private TbItemCatMapper itemCatMapper;
+	@Autowired
+	private RedisTemplate redisTemplate;
 
 	@Override
 	public PageResult searchByParentId(int pageNum, int pageSize, Long parentId) {
@@ -32,6 +35,12 @@ public class ItemCatServiceImpl implements ItemCatService {
 		TbItemCatExample.Criteria criteria = example.createCriteria();
 		criteria.andParentIdEqualTo(parentId);
 		Page<TbItemCat> page = (Page<TbItemCat>) itemCatMapper.selectByExample(example);
+
+		//每次执行查询的时候，一次性读取缓存进行存储 (因为每次增删改都要执行此方法)
+		List<TbItemCat> list = findAll();
+		for(TbItemCat itemCat:list){
+			redisTemplate.boundHashOps("itemCat").put(itemCat.getName(), itemCat.getTypeId());
+		}
 		return new PageResult(page.getTotal(),page.getPages(),page.getPageSize(),page.getResult());
 	}
 
