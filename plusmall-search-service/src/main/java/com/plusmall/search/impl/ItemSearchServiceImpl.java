@@ -105,6 +105,18 @@ public class ItemSearchServiceImpl implements ItemSearchService {
 				query.addFilterQuery(filterQuery);
 			}
 		}
+		//1.6分页查询
+		Integer pageNo= (Integer) searchMap.get("pageNo");//提取页码
+		if(pageNo==null){
+			pageNo=1;//默认第一页
+		}
+		Integer pageSize=(Integer) searchMap.get("pageSize");//每页记录数
+		if(pageSize==null){
+			pageSize=20;//默认20
+		}
+		query.setOffset((pageNo-1)*pageSize);//从第几条记录查询
+		query.setRows(pageSize);
+
 
 
 		HighlightPage<TbItem> page = solrTemplate.queryForHighlightPage(query,TbItem.class);
@@ -115,6 +127,8 @@ public class ItemSearchServiceImpl implements ItemSearchService {
 			}
 		}
 		map.put("rows",page.getContent());
+		map.put("totalPages", page.getTotalPages());//返回总页数
+		map.put("total", page.getTotalElements());//返回总记录数
 		//判断关键字是否为分类或者品牌
 		String keyword = (String) searchMap.get("keywords");
 		Set itemCats = redisTemplate.opsForHash().keys("itemCat");
