@@ -60,6 +60,9 @@ public class ItemSearchServiceImpl implements ItemSearchService {
 		query.setHighlightOptions(highlightOptions);//设置高亮选项
 
 		//1.1 关键字查询
+		//关键字空格处理
+		String keywords = (String) searchMap.get("keywords");
+		searchMap.put("keywords", keywords.replace(" ", ""));
 		Criteria criteria=new Criteria("item_keywords").is(searchMap.get("keywords"));
 		query.addCriteria(criteria);
 
