@@ -119,7 +119,20 @@ public class ItemSearchServiceImpl implements ItemSearchService {
 		}
 		query.setOffset((pageNo-1)*pageSize);//从第几条记录查询
 		query.setRows(pageSize);
+		//1.7排序
+		String sortValue= (String) searchMap.get("sort");//ASC  DESC
+		String sortField= (String) searchMap.get("sortField");//排序字段
+		if(sortValue!=null && !sortValue.equals("")){
+			if(sortValue.equals("ASC")){
+				Sort sort=new Sort(Sort.Direction.ASC, "item_"+sortField);
+				query.addSort(sort);
+			}
 
+			if(sortValue.equals("DESC")){
+				Sort sort=new Sort(Sort.Direction.DESC, "item_"+sortField);
+				query.addSort(sort);
+			}
+		}
 
 
 		HighlightPage<TbItem> page = solrTemplate.queryForHighlightPage(query,TbItem.class);
