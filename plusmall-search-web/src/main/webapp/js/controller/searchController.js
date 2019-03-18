@@ -99,4 +99,15 @@ app.controller('searchController',function($scope,searchService){
         $scope.search();
     }
 
+    //判断关键字是不是品牌
+    $scope.keywordsIsBrand=function(){
+        for(var i=0;i<$scope.resultMap.brandList.length;i++){
+            if($scope.searchMap.keywords.indexOf($scope.resultMap.brandList[i].text)>=0){//如果包含
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 });

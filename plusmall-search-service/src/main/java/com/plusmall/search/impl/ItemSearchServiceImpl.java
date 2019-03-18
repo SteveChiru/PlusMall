@@ -145,16 +145,6 @@ public class ItemSearchServiceImpl implements ItemSearchService {
 		map.put("rows",page.getContent());
 		map.put("totalPages", page.getTotalPages());//返回总页数
 		map.put("total", page.getTotalElements());//返回总记录数
-		//判断关键字是否为分类或者品牌
-		String keyword = (String) searchMap.get("keywords");
-		Set itemCats = redisTemplate.opsForHash().keys("itemCat");
-		if (itemCats.contains(keyword)){
-			map.put("category",keyword);
-		}
-		Set allBrand = redisTemplate.opsForSet().members("allBrand");
-		if (allBrand.contains(keyword)){
-			map.put("brand",keyword);
-		}
 		return map;
 	}
 
