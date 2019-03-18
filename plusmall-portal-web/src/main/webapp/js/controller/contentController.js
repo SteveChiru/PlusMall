@@ -11,6 +11,6 @@ app.controller("contentController",function($scope,contentService){
 
     //搜索跳转
     $scope.search=function () {
-        location.href="http://localhost:9104/search.html#?keywords="+$scope.keywords;
+        location.href="http://localhost:9390/search.html#?keywords="+$scope.keywords;
     }
 });
