@@ -84,6 +84,12 @@
             <artifactId>plusmall-operator-interface</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <!-- search-service -->
+        <dependency>
+            <groupId>org.plusmall</groupId>
+            <artifactId>plusmall-search-interface</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>

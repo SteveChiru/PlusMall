@@ -5,12 +5,16 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.plusmall.commons.PageResult;
 import com.plusmall.mapper.TbGoodsMapper;
+import com.plusmall.mapper.TbItemMapper;
 import com.plusmall.model.TbGoods;
 import com.plusmall.model.TbGoodsExample;
+import com.plusmall.model.TbItem;
+import com.plusmall.model.TbItemExample;
 import com.plusmall.operator.GoodsAuditService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -24,6 +28,8 @@ public class GoodsAuditServiceImpl implements GoodsAuditService {
 
 	@Autowired
 	private TbGoodsMapper tbGoodsMapper;
+	@Autowired
+	private TbItemMapper itemMapper;
 
 	@Override
 	public PageResult search(int pageNum, int pageSize, TbGoods tbGoods) {
@@ -57,5 +63,15 @@ public class GoodsAuditServiceImpl implements GoodsAuditService {
 			tbGoods.setIsDelete("1");
 			tbGoodsMapper.updateByPrimaryKey(tbGoods);
 		}
+	}
+
+	@Override
+	public List<TbItem> findItemListByGoodsIdAndStatus(Long[] goodsIds, String status) throws NullPointerException {
+		logger.info(logStr+"findItemListByGoodsIdAndStatus方法");
+		TbItemExample example=new TbItemExample();
+		TbItemExample.Criteria criteria = example.createCriteria();
+		criteria.andGoodsIdIn(Arrays.asList(goodsIds));
+		criteria.andStatusEqualTo(status);
+		return itemMapper.selectByExample(example);
 	}
 }

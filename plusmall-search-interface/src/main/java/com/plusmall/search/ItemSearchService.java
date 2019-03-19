@@ -8,4 +8,6 @@ import java.util.Map;
  */
 public interface ItemSearchService {
 	public Map<String,Object> search(Map searchMap) throws NullPointerException;
+	public void importList(List list);
+	public void deleteByGoodsIds(List goodsIdList);
 }
