@@ -24,6 +24,9 @@
         <module>plusmall-search-interface</module>
         <module>plusmall-search-service</module>
         <module>plusmall-search-web</module>
+        <module>plusmall-page-interface</module>
+        <module>plusmall-page-service</module>
+        <module>plusmall-page-web</module>
     </modules>
 
     <packaging>pom</packaging>
