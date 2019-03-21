@@ -60,6 +60,7 @@
         <jedis.version>2.9.0</jedis.version>
         <springDataRedis.version>1.7.2.RELEASE</springDataRedis.version>
         <springDataSolr.version>1.5.5.RELEASE</springDataSolr.version>
+        <freemarker.version>2.3.23</freemarker.version>
 
         <plusmall-pojo.version>1.0-SNAPSHOT</plusmall-pojo.version>
         <plusmall-dao.version>1.0-SNAPSHOT</plusmall-dao.version>
@@ -280,6 +281,12 @@
                 <groupId>org.springframework.data</groupId>
                 <artifactId>spring-data-solr</artifactId>
                 <version>${springDataSolr.version}</version>
+            </dependency>
+            <!-- FreeMarker -->
+            <dependency>
+                <groupId>org.freemarker</groupId>
+                <artifactId>freemarker</artifactId>
+                <version>${freemarker.version}</version>
             </dependency>
 
             <!-- plusmall-pojo -->

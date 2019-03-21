@@ -90,6 +90,12 @@
             <artifactId>plusmall-search-interface</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <!-- page-service -->
+        <dependency>
+            <groupId>org.plusmall</groupId>
+            <artifactId>plusmall-page-interface</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>

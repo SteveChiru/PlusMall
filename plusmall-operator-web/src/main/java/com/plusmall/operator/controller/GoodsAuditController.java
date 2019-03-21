@@ -6,6 +6,7 @@ import com.plusmall.commons.PageResult;
 import com.plusmall.model.TbGoods;
 import com.plusmall.model.TbItem;
 import com.plusmall.operator.GoodsAuditService;
+import com.plusmall.page.ItemPageService;
 import com.plusmall.search.ItemSearchService;
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,6 +31,8 @@ public class GoodsAuditController {
 	private GoodsAuditService goodsAuditService;
 	@Reference
 	private ItemSearchService itemSearchService;
+	@Reference
+	private ItemPageService itemPageService;
 
 	@RequestMapping("/search")
 	public PageResult search(int pageNum, int pageSize, @RequestBody TbGoods tbGoods){
@@ -73,4 +76,12 @@ public class GoodsAuditController {
 		}
 		return actionResult;
 	}
+
+	@RequestMapping("/genHtml")
+	public void genHtml(Long goodsId){
+		logger.info(logStr+"genHtml方法");
+		itemPageService.genItemHtml(goodsId);
+	}
+
+
 }
