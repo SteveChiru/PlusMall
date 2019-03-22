@@ -2,6 +2,7 @@
 app.controller('itemController',function($scope,$http){
 	//数量操作
 	$scope.addNum=function(x){
+
 		$scope.num=$scope.num+x;
 		if($scope.num<1){
 			$scope.num=1;

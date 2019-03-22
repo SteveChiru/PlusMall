@@ -35,7 +35,7 @@
                     "title":"${item.title!''}",
                     "price":${item.price?c},
                     "spec": ${item.spec}
-                }
+                },
             </#list>
         ];
     </script>
@@ -107,7 +107,7 @@
 							</div>
 							<div class="fl price">
 								<i>¥</i>
-								<em>${goods.price}</em>
+								<em>{{sku.price}}</em>
 								<span>降价通知</span>
 							</div>
 							<div class="fr remark">
@@ -152,16 +152,18 @@
 										</div>
 									</dt>
 									<#list specification.attributeValue as item>
-										<dd><a class="{{isSelected('${specification.attributeName}','${item}')?'selected':''}}"
-											   ng-click="selectSpecification('${specification.attributeName}','${item}')">${item}
-												<span title="点击取消选择">&nbsp;</span>
-												</a>
+										<dd>
+                                            <a class="{{isSelected('${specification.attributeName}','${item}')?'selected':''}}"
+                                               ng-click="selectSpecification('${specification.attributeName}','${item}')">
+                                                ${item}
+                                                <span title="点击取消选择">&nbsp;</span>
+                                            </a>
                                         </dd>
 									</#list>
 								</dl>
 							</#list>
 						</div>
-					
+
 						<div class="summary-wrap">
 							<div class="fl title">
 								<div class="control-group">
