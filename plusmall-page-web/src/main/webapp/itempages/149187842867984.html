@@ -24,8 +24,6 @@
     <!-- 引入JS业务代码 -->
     <script type="text/javascript" src="/plugins/angularjs/angular.min.js">  </script>
     <script type="text/javascript" src="/js/base.js">  </script>
-    <script type="text/javascript" src="/js/controller/itemController.js">  </script>
-
     <script>
         //SKU商品列表
         var skuList=[
@@ -35,15 +33,10 @@
                     "price":6500,
                     "spec": {"网络":"移动4G","机身内存":"32G"}
                 },
-                {
-                    "id":1369286,
-                    "title":"ThinkpadE580",
-                    "price":5000,
-                    "spec": {“机身内存”：“16G”，“上市季节”：“春”，“机械硬盘”：“1T”，}
-                },
         ];
     </script>
 
+    <script type="text/javascript" src="/js/controller/itemController.js">  </script>
 </head>
 
 <body ng-app="plusmall" ng-controller="itemController" ng-init="num=1;loadSku()">

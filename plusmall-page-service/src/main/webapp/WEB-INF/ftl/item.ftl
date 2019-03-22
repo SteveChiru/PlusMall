@@ -24,8 +24,6 @@
     <!-- 引入JS业务代码 -->
     <script type="text/javascript" src="/plugins/angularjs/angular.min.js">  </script>
     <script type="text/javascript" src="/js/base.js">  </script>
-    <script type="text/javascript" src="/js/controller/itemController.js">  </script>
-
     <script>
         //SKU商品列表
         var skuList=[
@@ -40,6 +38,7 @@
         ];
     </script>
 
+    <script type="text/javascript" src="/js/controller/itemController.js">  </script>
 </head>
 
 <body ng-app="plusmall" ng-controller="itemController" ng-init="num=1;loadSku()">

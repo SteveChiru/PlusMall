@@ -13,6 +13,7 @@ app.controller('itemController',function($scope,$http){
 	//用户选择规格
 	$scope.selectSpecification=function(name,value){	
 		$scope.specificationItems[name]=value;
+        searchSku();//读取sku
 	}	
 	//判断某规格选项是否被用户选中
 	$scope.isSelected=function(name,value){
@@ -48,8 +49,10 @@ app.controller('itemController',function($scope,$http){
 
 	//查询SKU
 	searchSku=function(){
+	    alert("进入searchSku方法");
 		for(var i=0;i<skuList.length;i++ ){
 			if( matchObject(skuList[i].spec ,$scope.specificationItems ) ){
+			    alert("匹配到了");
 				$scope.sku=skuList[i];
 				return ;
 			}			
@@ -57,11 +60,11 @@ app.controller('itemController',function($scope,$http){
 		$scope.sku={id:0,title:'--------',price:0};//如果没有匹配的		
 	}
 
-	//用户选择规格
+	/*//用户选择规格
 	$scope.selectSpecification=function(name,value){	
 		$scope.specificationItems[name]=value;
 		searchSku();//读取sku
-	}
+	}*/
 
 	//添加商品到购物车
 	$scope.addToCart=function(){

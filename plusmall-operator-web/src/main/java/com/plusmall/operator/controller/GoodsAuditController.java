@@ -54,6 +54,10 @@ public class GoodsAuditController {
 				}else{
 					System.out.println("没有明细数据");
 				}
+				//静态页生成
+				for (Long goodsId : ids){
+					itemPageService.genItemHtml(goodsId);
+				}
 			}
 			actionResult = new ActionResult(true,"成功更新商品状态");
 		}catch (NullPointerException e){
