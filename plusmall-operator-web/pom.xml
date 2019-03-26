@@ -38,6 +38,11 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
         </dependency>
+        <!-- spring-jms -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jms</artifactId>
+        </dependency>
         <!--引用dubbo-->
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -77,23 +82,21 @@
             <groupId>org.csource</groupId>
             <artifactId>fastdfs-client-java</artifactId>
         </dependency>
+        <!-- activemq-client -->
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-client</artifactId>
+        </dependency>
+        <!--fastJson-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
 
         <!--operator-service-->
         <dependency>
             <groupId>org.plusmall</groupId>
             <artifactId>plusmall-operator-interface</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <!-- search-service -->
-        <dependency>
-            <groupId>org.plusmall</groupId>
-            <artifactId>plusmall-search-interface</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <!-- page-service -->
-        <dependency>
-            <groupId>org.plusmall</groupId>
-            <artifactId>plusmall-page-interface</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>

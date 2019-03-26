@@ -61,6 +61,7 @@
         <springDataRedis.version>1.7.2.RELEASE</springDataRedis.version>
         <springDataSolr.version>1.5.5.RELEASE</springDataSolr.version>
         <freemarker.version>2.3.23</freemarker.version>
+        <activemqClient.version>5.13.4</activemqClient.version>
 
         <plusmall-pojo.version>1.0-SNAPSHOT</plusmall-pojo.version>
         <plusmall-dao.version>1.0-SNAPSHOT</plusmall-dao.version>
@@ -106,6 +107,12 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-test</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <!-- spring-jms -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jms</artifactId>
                 <version>${spring.version}</version>
             </dependency>
             <!--druid-->
@@ -287,6 +294,12 @@
                 <groupId>org.freemarker</groupId>
                 <artifactId>freemarker</artifactId>
                 <version>${freemarker.version}</version>
+            </dependency>
+            <!-- active-client -->
+            <dependency>
+                <groupId>org.apache.activemq</groupId>
+                <artifactId>activemq-client</artifactId>
+                <version>${activemqClient.version}</version>
             </dependency>
 
             <!-- plusmall-pojo -->

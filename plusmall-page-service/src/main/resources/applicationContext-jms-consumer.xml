@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- activemq connectionFactory -->
+    <bean id="targetConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <property name="brokerURL" value="tcp://cloudserver:61616"/>
+    </bean>
+    <!-- springjms中使用的connectionFactory -->
+    <bean id="connectionFactory" class="org.springframework.jms.connection.SingleConnectionFactory">
+        <!-- 目标ConnectionFactory对应真实的可以产生JMS Connection的ConnectionFactory -->
+        <property name="targetConnectionFactory" ref="targetConnectionFactory"/>
+    </bean>
+
+    <!--这个是队列目的地，点对点的  文本信息-->
+    <bean id="topicPageDestination" class="org.apache.activemq.command.ActiveMQTopic">
+        <constructor-arg value="plusmall_topic_page"/>
+    </bean>
+
+    <!-- 我的监听类 -->
+    <bean id="pageListener" class="com.plusmall.page.impl.PageListener"></bean>
+
+    <!-- 消息监听容器 -->
+    <bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="connectionFactory" />
+        <property name="destination" ref="topicPageDestination" />
+        <property name="messageListener" ref="pageListener" />
+    </bean>
+
+    <!--这个是队列目的地，点对点的  文本信息-->
+    <bean id="topicPageDeleteDestination" class="org.apache.activemq.command.ActiveMQTopic">
+        <constructor-arg value="plusmall_topic_page_delete"/>
+    </bean>
+
+    <!-- 我的监听类 -->
+    <bean id="pageDeleteListener" class="com.plusmall.page.impl.PageListener"></bean>
+
+    <!-- 消息监听容器 -->
+    <bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="connectionFactory" />
+        <property name="destination" ref="topicPageDeleteDestination" />
+        <property name="messageListener" ref="pageDeleteListener" />
+    </bean>
+
+</beans>
