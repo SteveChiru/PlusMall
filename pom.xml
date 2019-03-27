@@ -27,6 +27,9 @@
         <module>plusmall-page-interface</module>
         <module>plusmall-page-service</module>
         <module>plusmall-page-web</module>
+        <module>plusmall-user-interface</module>
+        <module>plusmall-user-service</module>
+        <module>plusmall-user-web</module>
     </modules>
 
     <packaging>pom</packaging>
