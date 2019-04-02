@@ -30,6 +30,9 @@
         <module>plusmall-user-interface</module>
         <module>plusmall-user-service</module>
         <module>plusmall-user-web</module>
+        <module>plusmall-cart-interface</module>
+        <module>plusmall-cart-service</module>
+        <module>plusmall-cart-web</module>
     </modules>
 
     <packaging>pom</packaging>

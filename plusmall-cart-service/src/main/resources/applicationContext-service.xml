@@ -9,9 +9,9 @@
        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
     <!--引用dubbo服务-->
-    <dubbo:protocol name="dubbo" port="20882"></dubbo:protocol>
-    <dubbo:application name="plusmall-business-service"/>
+    <dubbo:protocol name="dubbo" port="20887"></dubbo:protocol>
+    <dubbo:application name="plusmall-cart-service"/>
     <dubbo:registry address="zookeeper://cloudserver:2181"/>
-    <dubbo:annotation package="com.plusmall.business.impl"/>
+    <dubbo:annotation package="com.plusmall.cart.impl"/>
 
 </beans>
