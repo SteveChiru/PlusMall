@@ -77,6 +77,17 @@
             <groupId>org.csource</groupId>
             <artifactId>fastdfs-client-java</artifactId>
         </dependency>
+        <!-- servlet-api -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!--fastJson-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
 
         <!--business-service-->
         <dependency>
