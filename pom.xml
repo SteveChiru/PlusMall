@@ -33,6 +33,8 @@
         <module>plusmall-cart-interface</module>
         <module>plusmall-cart-service</module>
         <module>plusmall-cart-web</module>
+        <module>plusmall-order-interface</module>
+        <module>plusmall-order-service</module>
     </modules>
 
     <packaging>pom</packaging>

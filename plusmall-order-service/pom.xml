@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.plusmall</groupId>
-    <artifactId>plusmall-cart-web</artifactId>
+    <artifactId>plusmall-order-service</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <packaging>war</packaging>
@@ -24,24 +24,6 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-        </dependency>
-        <!--引入spring-security-->
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-config</artifactId>
-        </dependency>
-        <!-- spring-security-cas -->
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-cas</artifactId>
         </dependency>
         <!--引用dubbo-->
         <dependency>
@@ -63,55 +45,32 @@
             <groupId>javassist</groupId>
             <artifactId>javassist</artifactId>
         </dependency>
-        <!-- jackson -->
+        <!-- log4j -->
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+        </dependency>
+        <!-- redis相关 -->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
         </dependency>
-        <!--multipartResolver depend commons-fileupload-->
+        <!-- junit -->
         <dependency>
-            <groupId>commons-fileupload</groupId>
-            <artifactId>commons-fileupload</artifactId>
-        </dependency>
-        <!--fastDFS-->
-        <dependency>
-            <groupId>org.csource</groupId>
-            <artifactId>fastdfs-client-java</artifactId>
-        </dependency>
-        <!-- servlet-api -->
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <scope>provided</scope>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
         </dependency>
         <!--fastJson-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
         </dependency>
-        <!-- cas-client-core -->
-        <dependency>
-            <groupId>org.jasig.cas.client</groupId>
-            <artifactId>cas-client-core</artifactId>
-        </dependency>
 
-        <!-- cart-service -->
-        <dependency>
-            <groupId>org.plusmall</groupId>
-            <artifactId>plusmall-cart-interface</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <!-- user-interface -->
-        <dependency>
-            <groupId>org.plusmall</groupId>
-            <artifactId>plusmall-user-interface</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <!-- order-interface -->
+        <!--依赖运营商接口-->
         <dependency>
             <groupId>org.plusmall</groupId>
             <artifactId>plusmall-order-interface</artifactId>
@@ -127,7 +86,7 @@
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <configuration>
                     <path>/</path>
-                    <port>9790</port>
+                    <port>9891</port>
                 </configuration>
             </plugin>
         </plugins>
