@@ -9,6 +9,7 @@ import com.plusmall.pojogroup.Cart;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -70,6 +71,7 @@ public class CartController {
 	 * @return
 	 */
 	@RequestMapping("/addGoodsToCartList")
+	@CrossOrigin(origins = "http://localhost:9490",allowCredentials = "true")
 	public ActionResult addGoodsToCartList(Long itemId,Integer num){
 
 		//当前登录人账号

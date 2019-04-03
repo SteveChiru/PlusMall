@@ -23,4 +23,12 @@ app.controller('cartController',function ($scope,cartService) {
         );
     }
 
+    $scope.findAddresslist=function () {
+        cartService.findAddressList().success(
+            function (callback) {
+                $scope.addressList = callback;
+            }
+        );
+    }
+
 });

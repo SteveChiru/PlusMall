@@ -99,10 +99,16 @@
             <artifactId>cas-client-core</artifactId>
         </dependency>
 
-        <!--business-service-->
+        <!-- cart-service -->
         <dependency>
             <groupId>org.plusmall</groupId>
             <artifactId>plusmall-cart-interface</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <!-- user-interface -->
+        <dependency>
+            <groupId>org.plusmall</groupId>
+            <artifactId>plusmall-user-interface</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
