@@ -6,7 +6,9 @@ import com.plusmall.mapper.TbItemMapper;
 import com.plusmall.model.TbItem;
 import com.plusmall.model.TbOrderItem;
 import com.plusmall.pojogroup.Cart;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -18,8 +20,14 @@ import java.util.List;
 @Service
 public class CartServiceImpl implements CartService {
 
+	private static Logger logger = Logger.getLogger(CartServiceImpl.class);
+	private String logStr = "进入CartServiceImpl-";
+
 	@Autowired
 	private TbItemMapper itemMapper;
+
+	@Autowired
+	private RedisTemplate redisTemplate;
 
 	@Override
 	public List<Cart> addGoodsToCartList(List<Cart> cartList, Long itemId, Integer num) {
@@ -71,6 +79,40 @@ public class CartServiceImpl implements CartService {
 		}
 
 		return cartList;
+	}
+
+	@Override
+	public List<Cart> findCartListFromRedis(String username) {
+		logger.info(logStr+"findCartListFromRedis方法");
+		List<Cart> cartList = (List<Cart>) redisTemplate.boundHashOps("cartList").get(username);
+		if(cartList==null){
+			cartList=new ArrayList();
+		}
+		return cartList;
+
+	}
+
+	@Override
+	public void saveCartListToRedis(String username, List<Cart> cartList) {
+		logger.info(logStr+"saveCartListToRedis方法");
+		redisTemplate.boundHashOps("cartList").put(username, cartList);
+	}
+
+	/**
+	 * 合并购物车
+	 * @param cartList1
+	 * @param cartList2
+	 * @return
+	 */
+	@Override
+	public List<Cart> mergeCartList(List<Cart> cartList1, List<Cart> cartList2) {
+		logger.info(logStr+"mergeCartList方法");
+		for (Cart cart : cartList2){
+			for (TbOrderItem orderItem : cart.getOrderItemList()){
+				cartList1 = addGoodsToCartList(cartList1,orderItem.getItemId(),orderItem.getNum());
+			}
+		}
+		return cartList1;
 	}
 
 	/**

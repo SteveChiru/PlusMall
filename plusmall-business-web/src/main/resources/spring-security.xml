@@ -49,7 +49,7 @@
     </beans:bean>
     <!-- 属性引用已经注册在zookeeper上的服务 -->
     <dubbo:application name="plusmall-business-web"/>
-    <dubbo:registry address="zookeeper://47.94.149.249:2181"/>
+    <dubbo:registry address="zookeeper://cloudserver:2181"/>
     <dubbo:reference id="sellerService"
          interface="com.plusmall.business.SellerService">
     </dubbo:reference>

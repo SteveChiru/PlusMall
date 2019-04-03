@@ -68,6 +68,8 @@
         <springDataSolr.version>1.5.5.RELEASE</springDataSolr.version>
         <freemarker.version>2.3.23</freemarker.version>
         <activemqClient.version>5.13.4</activemqClient.version>
+        <spring-security-cas.version>4.1.0.RELEASE</spring-security-cas.version>
+        <cas-client-core.version>3.3.3</cas-client-core.version>
 
         <plusmall-pojo.version>1.0-SNAPSHOT</plusmall-pojo.version>
         <plusmall-dao.version>1.0-SNAPSHOT</plusmall-dao.version>
@@ -120,6 +122,18 @@
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-jms</artifactId>
                 <version>${spring.version}</version>
+            </dependency>
+            <!-- spring-security-cas -->
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-cas</artifactId>
+                <version>${spring-security-cas.version}</version>
+            </dependency>
+            <!-- cas-client-core -->
+            <dependency>
+                <groupId>org.jasig.cas.client</groupId>
+                <artifactId>cas-client-core</artifactId>
+                <version>${cas-client-core.version}</version>
             </dependency>
             <!--druid-->
             <dependency>
