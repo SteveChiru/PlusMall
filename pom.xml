@@ -35,6 +35,9 @@
         <module>plusmall-cart-web</module>
         <module>plusmall-order-interface</module>
         <module>plusmall-order-service</module>
+        <module>plusmall-seckill-interface</module>
+        <module>plusmall-seckill-service</module>
+        <module>plusmall-seckill-web</module>
     </modules>
 
     <packaging>pom</packaging>
